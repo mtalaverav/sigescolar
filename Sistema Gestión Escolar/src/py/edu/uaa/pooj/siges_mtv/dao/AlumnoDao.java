@@ -6,18 +6,64 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import py.edu.uaa.pooj.siges_mtv.model.Alumno;
+import py.edu.uaa.pooj.siges_mtv.model.Curso;
 
 public class AlumnoDao {
-	
+
 	private static final String DB_DRIVER = "org.postgresql.Driver";
 	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/sistgescolar";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "4061950";
 
+	public Alumno recuperarAlumnoPorCodigo(String codigo) {
+		Connection dbConnection = null;
+
+		PreparedStatement statement = null;
+
+		String query = "SELECT * FROM alumno where codigo = ?";
+
+		try {
+			dbConnection = getDBConnection();
+
+			statement = dbConnection.prepareStatement(query);
+
+			statement.setString(1, codigo);
+			ResultSet rs = statement.executeQuery(query);
+
+			if (rs.next()) {
+				Alumno alumno = new Alumno();
+
+				alumno.setNombre(rs.getString(1));
+				alumno.setApellido(rs.getString(2));
+				alumno.setNumeroCedula(rs.getInt(3));
+
+				return alumno;
+			}
+		}
+
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+				if (dbConnection != null) {
+					dbConnection.close();
+				}
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+
+		return null;
+	}
 
 	public boolean registrarAlumno(Alumno alumno) throws SQLException {
 
@@ -25,7 +71,8 @@ public class AlumnoDao {
 		PreparedStatement preparedStatement = null; // sentencias precompiladas
 
 		// se borro los dats para prueba, ojo volver a agregar.
-		String insertTableSQL = "INSERT INTO alumno" + "(nombre, apellido, numeroCedula) VALUES" + "(?,?,?)";
+		String insertTableSQL = "INSERT INTO alumno" + "(nombre, apellido, numeroCedula, codigo_curso) VALUES"
+				+ "(?,?,?,?)";
 
 		try {
 			dbConnection = getDBConnection(); // metodo local
@@ -40,6 +87,12 @@ public class AlumnoDao {
 			// preparedStatement.setObject(6, alumno.getDireccion());
 			// preparedStatement.setObject(7, alumno.getCurso());
 			// preparedStatement.setObject(8, alumno.getEncargado());
+
+			if (alumno.getCurso() != null) {
+				preparedStatement.setString(4, alumno.getCurso().getCodigo());
+			} else {
+				preparedStatement.setNull(4, Types.CHAR);
+			}
 
 			preparedStatement.executeUpdate();
 
@@ -69,7 +122,7 @@ public class AlumnoDao {
 		Statement statement = null;
 
 		// recuperacion de alumno
-		
+
 		String query = "SELECT *FROM alumno";
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try {
@@ -83,33 +136,33 @@ public class AlumnoDao {
 				// crear objeto del modelo
 				// setear propiedades del modelo en base a lo ue se recupera de
 				// la database
-			Alumno	alumno = new Alumno();
+				Alumno alumno = new Alumno();
 
 				alumno.setNombre(rs.getString(1));
 				alumno.setApellido(rs.getString(2));
 				// alumno.setNumeroCedula(rs.getString(3));
-				
+
 				alumnos.add(alumno);
 
 			}
-			
-//			System.out.println(alumno.toString());
-//			return alumno;
-			
+
+			// System.out.println(alumno.toString());
+			// return alumno;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				statement.close();
 				dbConnection.close();
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return alumnos;
 	}
-	
+
 	private static Connection getDBConnection() {
 
 		Connection dbConnection = null;

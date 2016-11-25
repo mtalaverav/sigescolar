@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import py.edu.uaa.pooj.siges_mtv.model.TipoEncargado;
-import py.edu.uaa.pooj.siges_mtv.model.Turno;
 
 public class TipoEncargadoDao {
 	

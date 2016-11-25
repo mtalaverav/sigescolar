@@ -38,12 +38,12 @@ public class AsistenciaPorCursoConsultaDao {
 			 // setear propiedades del modelo en base a lo ue se recupera de
 			 // la database
 			
-			 asistencia = new AsistenciaPorCurso();
-			
-			 asistencia.setEmpleado(rs.getString(1));
-			 asistencia.setCurso(rs.getString(2));
-			 asistencia.setAlumno(rs.getString(3));
-			 // falta cargar los demas atributos por tipo de dato.
+//				asistencia = new AsistenciaPorCurso();
+//
+//				asistencia.setEmpleado(rs.getString(1));
+//				asistencia.setCurso(rs.getString(2));
+//				asistencia.setAlumno(rs.getString(3));
+//				// falta cargar los demas atributos por tipo de dato.
 			
 			 }
 			 System.out.println(asistencia.toString());

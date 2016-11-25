@@ -2,20 +2,22 @@ package py.edu.pooj.uaa.siges.ui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
@@ -24,15 +26,15 @@ import com.toedter.calendar.JDateChooser;
 
 import py.edu.uaa.pooj.siges_mtv.dao.AsistenciaPorCursoDao;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
-import java.awt.Font;
 
 public class AsistenciaPorCursoView {
 
+	private static final String DB_DRIVER = "org.postgresql.Driver";
+	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/sistgescolar";
+	private static final String DB_USER = "postgres";
+	private static final String DB_PASSWORD = "4061950";
+
 	private JFrame frmRegistroDeAsistencia;
-	private JTextField textEmpleado;
-	private JTextField textCurso;
-	private JTable table;
-	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -86,41 +88,7 @@ public class AsistenciaPorCursoView {
 		frmRegistroDeAsistencia.getContentPane().add(lblRegistroDeAsistencia);
 
 		JButton btnRegistrar = new JButton("Registrar");
-		btnRegistrar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-				AsistenciaPorCurso asistencia_curso = new AsistenciaPorCurso();
-				
-				try {
-
-					asistencia_curso.setEmpleado(textEmpleado.getText());
-					// no se asistenciaCurso.setFecha(fecha);
-					asistencia_curso.setCurso(textCurso.getText());
-				//	asistencia_curso.setAlumno(textAlumno.getText());
-					// asistenciaCurso.setDescripcion(textDescripcion.g)
-					// asistenciaCurso.setJustificativo(textJustificativo.);
-
-					AsistenciaPorCursoDao asistenciaCursoDao = new AsistenciaPorCursoDao();
-					Boolean isInserted = asistenciaCursoDao.registrarAsistencia(asistencia_curso);
-
-					if (isInserted) {
-						JOptionPane.showMessageDialog(null, "Registro correcto", "", JOptionPane.INFORMATION_MESSAGE);
-
-					} else {
-						JOptionPane.showMessageDialog(null, "No se pudo insertar el registro de asistencia", null,
-								JOptionPane.ERROR_MESSAGE, null);
-					}
-
-				} catch (SQLException e1) {
-
-					System.out.println(e1.getMessage());
-
-				}
-			}
-		});
-
-		btnRegistrar.setBounds(30, 524, 89, 23);
+		btnRegistrar.setBounds(10, 457, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
 
 		JButton btnAbrirConsulta = new JButton("Informe");
@@ -131,7 +99,7 @@ public class AsistenciaPorCursoView {
 				window.frmInformeAsistenciaDe.setVisible(true);
 			}
 		});
-		btnAbrirConsulta.setBounds(213, 524, 89, 23);
+		btnAbrirConsulta.setBounds(365, 457, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnAbrirConsulta);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -141,7 +109,7 @@ public class AsistenciaPorCursoView {
 				confirmar();
 			}
 		});
-		btnCancelar.setBounds(361, 524, 89, 23);
+		btnCancelar.setBounds(378, 543, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnCancelar);
 
 		JLabel lblEmpleado = new JLabel("Empleado");
@@ -165,16 +133,6 @@ public class AsistenciaPorCursoView {
 		txtpnCargaJuistificación.setBounds(111, 358, 191, 58);
 		frmRegistroDeAsistencia.getContentPane().add(txtpnCargaJuistificación);
 
-		textEmpleado = new JTextField();
-		textEmpleado.setBounds(89, 134, 86, 20);
-		frmRegistroDeAsistencia.getContentPane().add(textEmpleado);
-		textEmpleado.setColumns(10);
-
-		textCurso = new JTextField();
-		textCurso.setBounds(89, 176, 86, 20);
-		frmRegistroDeAsistencia.getContentPane().add(textCurso);
-		textCurso.setColumns(10);
-
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setToolTipText("");
 		dateChooser.setBounds(80, 60, 95, 20);
@@ -193,12 +151,40 @@ public class AsistenciaPorCursoView {
 		JRadioButton optNo = new JRadioButton("No");
 		opcionesDescripcion.add(optNo);
 
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(280, 60, 180, 282);
-		frmRegistroDeAsistencia.getContentPane().add(scrollPane);
+		// FALTA
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
+		btnEliminar.setBounds(124, 457, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btnActualizar.setBounds(223, 457, 116, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnActualizar);
+
+		JComboBox cmbEmpleado = new JComboBox();
+		cmbEmpleado.setBounds(82, 134, 93, 20);
+		frmRegistroDeAsistencia.getContentPane().add(cmbEmpleado);
+
+		JComboBox cmbCurso = new JComboBox();
+		cmbCurso.setBounds(80, 176, 93, 20);
+		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
+
+		JLabel lblAlumno = new JLabel("Alumno");
+		lblAlumno.setBounds(233, 179, 46, 14);
+		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
+
+		JComboBox cmbAlumno = new JComboBox();
+		cmbAlumno.setBounds(289, 176, 93, 20);
+		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
 
 	}
 }

@@ -14,10 +14,10 @@ public class AsistenciaPorCurso {
 
 	
 	//cambiar tipo de datos.
-	private String empleado;
+	private Empleado empleado;
 	private Date fecha;
-	private String curso;
-	private String alumno;
+	private Curso curso;
+	private Alumno alumno;
 	private Boolean descripcion;
 	private String justificativo;
 	private List <Alumno> alumnos;
@@ -26,27 +26,27 @@ public class AsistenciaPorCurso {
 
 	}
 
-	public String getEmpleado() {
+	public Empleado getEmpleado() {
 		return empleado;
 	}
 
-	public void setEmpleado(String empleado) {
+	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
 
-	public String getCurso() {
+	public Curso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 
-	public String getAlumno() {
+	public Alumno getAlumno() {
 		return alumno;
 	}
 
-	public void setAlumno(String alumno) {
+	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
 	}
 

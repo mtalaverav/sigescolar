@@ -10,13 +10,14 @@ public abstract class Persona {
 
 	private String nombre;
 	private String apellido;
-	private int numeroCedula;
-	private Domicilio direccion;
-	private Contacto contacto;
-	private País nacionalidad;
+	protected int numeroCedula;
+	protected Domicilio direccion;
+	protected Contacto contacto;
+	protected País nacionalidad;
 
 	public Persona(String nombre, String apellido, int numeroCedula, Domicilio direccion, Contacto contacto,
 			País nacionalidad) {
+		
 		super();
 
 		this.nombre = nombre;

@@ -151,7 +151,7 @@ public class AsistenciaPorCursoConsultaView {
 			ResultSet rs = statement.executeQuery(consultaCursos);
 
 			while (rs.next()) {
-				comboCurso.addItem(rs.getString(1));
+				extracted(comboCurso, rs);
 			}
 			rs.close();
 
@@ -161,7 +161,7 @@ public class AsistenciaPorCursoConsultaView {
 			ResultSet rS = statement.executeQuery(consultaDescripcion);
 
 			while (rS.next()) {
-				comboDescripcion.addItem(rS.getString(1));
+				extracted(comboDescripcion, rS);
 			}
 			rs.close();
 
@@ -169,6 +169,10 @@ public class AsistenciaPorCursoConsultaView {
 
 		}
 
+	}
+
+	private void extracted(JComboBox comboCurso, ResultSet rs) throws SQLException {
+		comboCurso.addItem(rs.getString(1));
 	}
 
 	private static Connection getDBConnection() {
