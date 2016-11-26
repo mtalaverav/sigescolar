@@ -8,8 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,8 +27,12 @@ import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import py.edu.uaa.pooj.siges_mtv.dao.AlumnoDao;
 import py.edu.uaa.pooj.siges_mtv.dao.AsistenciaPorCursoDao;
+import py.edu.uaa.pooj.siges_mtv.dao.CursoDao;
+import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
+import py.edu.uaa.pooj.siges_mtv.model.Curso;
 
 public class AsistenciaPorCursoView {
 
@@ -33,6 +40,7 @@ public class AsistenciaPorCursoView {
 	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/sistgescolar";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "4061950";
+	public JDateChooser dateChooser1;
 
 	private JFrame frmRegistroDeAsistencia;
 
@@ -86,10 +94,6 @@ public class AsistenciaPorCursoView {
 		JLabel lblRegistroDeAsistencia = new JLabel("Registro de Asistencia Por Curso");
 		lblRegistroDeAsistencia.setBounds(124, 0, 215, 35);
 		frmRegistroDeAsistencia.getContentPane().add(lblRegistroDeAsistencia);
-
-		JButton btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBounds(10, 457, 89, 23);
-		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
 
 		JButton btnAbrirConsulta = new JButton("Informe");
 		btnAbrirConsulta.addMouseListener(new MouseAdapter() {
@@ -185,6 +189,64 @@ public class AsistenciaPorCursoView {
 		JComboBox cmbAlumno = new JComboBox();
 		cmbAlumno.setBounds(289, 176, 93, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
+
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setBounds(13, 457, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
+				AsistenciaPorCursoDao asisteCursoDao = new AsistenciaPorCursoDao();
+				CursoDao cursoDao = new CursoDao();
+				AlumnoDao alumnoDao = new AlumnoDao();
+
+				try {
+
+					// FECHA
+					Date date = dateChooser1.getDate();
+					String fecha = DateFormat.getInstance().format(date);
+					asistCurso.setFecha(fecha);
+
+					// CURSO
+
+					List<Curso> cursos = cursoDao.recuperarCursos();
+					ArrayList<String> stringComboCurso = new ArrayList<>();
+					for (Curso curso : cursos) {
+						stringComboCurso.add(curso.getDecripcion());
+					}
+					JComboBox cmbCurso = new JComboBox(stringComboCurso.toArray());
+
+					// ALUMNO
+					List<Alumno> alumnos = alumnoDao.recuperarAlumno();
+					ArrayList<String> stringComboAlumno = new ArrayList<>();
+					for (Alumno alumno : alumnos) {
+						stringComboAlumno.add(alumno.getNombre());
+						stringComboAlumno.add(alumno.getApellido());
+					}
+					JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
+
+					// FALTAN DATOS!!!!
+
+					Boolean isInserted = asisteCursoDao.registrarAsistencia(asistCurso);
+
+					if (isInserted) {
+						JOptionPane.showMessageDialog(null, "Alumno insertado correctamente", "",
+								JOptionPane.INFORMATION_MESSAGE);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "No se pudo insertar el registro del alumno", null,
+								JOptionPane.ERROR_MESSAGE, null);
+					}
+
+				} catch (SQLException e) {
+
+					System.out.println(e.getMessage());
+
+				}
+			}
+
+		});
 
 	}
 }

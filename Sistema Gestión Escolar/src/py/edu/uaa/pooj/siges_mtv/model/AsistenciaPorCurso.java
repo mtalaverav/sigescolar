@@ -15,7 +15,7 @@ public class AsistenciaPorCurso {
 	
 	//cambiar tipo de datos.
 	private Empleado empleado;
-	private Date fecha;
+	private String fecha;
 	private Curso curso;
 	private Alumno alumno;
 	private Boolean descripcion;
@@ -66,11 +66,11 @@ public class AsistenciaPorCurso {
 		this.justificativo = justificativo;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
