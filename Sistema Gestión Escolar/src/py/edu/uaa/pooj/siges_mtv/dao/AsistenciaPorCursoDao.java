@@ -92,8 +92,8 @@ public class AsistenciaPorCursoDao {
 		PreparedStatement preparedStatement = null;
 
 		// AGREGAR FECHA, DESCRIPCION Y JUSTIFICATIVO
-		String insertTableSQL = "INSERT INTO asistencia_curso" + "(empleado, codigo_curso, alumno, ) VALUES"
-				+ "(?,?,?)";
+		String insertTableSQL = "INSERT INTO asistencia_curso" + "( empleado, fecha, curso, alumno ) VALUES"
+				+ "(?, ?, ?, ?)";
 
 		try {
 			dbConnection = getDBConnection();
@@ -106,15 +106,22 @@ public class AsistenciaPorCursoDao {
 				preparedStatement.setNull(1, Types.CHAR);
 			}
 
+			// FECHA
+			if (asistencia_curso.getFecha() != null) {
+				preparedStatement.setString(2, asistencia_curso.getFecha());
+			} else {
+				preparedStatement.setNull(2, Types.CHAR);
+			}
+
 			// CURSO
 			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(4, asistencia_curso.getCurso().getCodigo());
+				preparedStatement.setString(3, asistencia_curso.getCurso().getCodigo());
 			} else {
-				preparedStatement.setNull(4, Types.CHAR);
+				preparedStatement.setNull(3, Types.CHAR);
 			}
 
 			// Alumno
-			if (asistencia_curso.getCurso() != null) {
+			if (asistencia_curso.getAlumno() != null) {
 				preparedStatement.setString(4, asistencia_curso.getAlumno().getCodigo());
 			} else {
 				preparedStatement.setNull(4, Types.CHAR);
