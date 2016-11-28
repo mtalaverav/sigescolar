@@ -71,7 +71,7 @@ public class AlumnoDao {
 		PreparedStatement preparedStatement = null; // sentencias precompiladas
 
 		// se borro los dats para prueba, ojo volver a agregar.
-		String insertTableSQL = "INSERT INTO alumno" + "(nombre, apellido, numeroCedula, codigo_curso) VALUES"
+		String insertTableSQL = "INSERT INTO alumno" + "(nombre, apellido, numeroCedula, curso) VALUES"
 				+ "(?,?,?,?)";
 
 		try {

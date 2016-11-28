@@ -40,6 +40,7 @@ public class AsistenciaPorCursoDao {
 				AsistenciaPorCurso asistcurso = new AsistenciaPorCurso();
 
 				// Empleado
+				
 				String codigoEmpleado = rs.getString(1);
 				if (codigoEmpleado != null) {
 					Empleado empleado = this.empleadoDao.recuperarEmpleadoPorCodigo(codigoEmpleado);
@@ -105,7 +106,8 @@ public class AsistenciaPorCursoDao {
 			} else {
 				preparedStatement.setNull(1, Types.CHAR);
 			}
-
+			
+			
 			// FECHA
 			if (asistencia_curso.getFecha() != null) {
 				preparedStatement.setString(2, asistencia_curso.getFecha());
@@ -209,6 +211,8 @@ public class AsistenciaPorCursoDao {
 			} else {
 				preparedStatement.setNull(1, Types.CHAR);
 			}
+			
+//			preparedStatement.setString(1, asistencia_curso.getEmpleado());
 
 			// CURSO
 			if (asistencia_curso.getCurso() != null) {

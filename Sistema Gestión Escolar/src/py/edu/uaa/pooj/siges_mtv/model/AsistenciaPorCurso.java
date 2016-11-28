@@ -1,6 +1,5 @@
 package py.edu.uaa.pooj.siges_mtv.model;
 
-import java.util.Date;
 import java.util.List;
 
 

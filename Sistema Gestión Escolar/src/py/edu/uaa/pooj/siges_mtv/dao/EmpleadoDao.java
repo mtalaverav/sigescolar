@@ -23,7 +23,7 @@ public class EmpleadoDao {
 
 		PreparedStatement statement = null;
 
-		String query = "SELECT * FROM empleado where codigo = ?";
+		String query = "SELECT * FROM empleado where nombre = ?";
 
 		try {
 			dbConnection = getDBConnection();
@@ -39,7 +39,7 @@ public class EmpleadoDao {
 				empleado.setCodigo(rs.getString(1));
 				empleado.setNombre(rs.getString(2));
 				empleado.setApellido(rs.getString(3));
-				empleado.setNumeroCedula(rs.getInt(4));
+
 				return empleado;
 			}
 		}
@@ -77,9 +77,8 @@ public class EmpleadoDao {
 				Empleado empleado = new Empleado();
 
 				empleado.setCodigo(rs.getString(1));
-				empleado.setNombre(rs.getString(2));
-				empleado.setApellido(rs.getString(3));
-				empleado.setNumeroCedula(rs.getInt(4));
+				empleado.setNombre(rs.getString(1));
+				empleado.setApellido(rs.getString(2));
 
 				empleados.add(empleado);
 			}

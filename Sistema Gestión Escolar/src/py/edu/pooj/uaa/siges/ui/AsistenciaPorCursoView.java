@@ -8,12 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,19 +30,13 @@ import com.toedter.calendar.JDateChooser;
 import py.edu.uaa.pooj.siges_mtv.dao.AlumnoDao;
 import py.edu.uaa.pooj.siges_mtv.dao.AsistenciaPorCursoDao;
 import py.edu.uaa.pooj.siges_mtv.dao.CursoDao;
+import py.edu.uaa.pooj.siges_mtv.dao.EmpleadoDao;
 import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
+import py.edu.uaa.pooj.siges_mtv.model.Empleado;
 
 public class AsistenciaPorCursoView {
-
-	private static final String DB_DRIVER = "org.postgresql.Driver";
-	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/sistgescolar";
-	private static final String DB_USER = "postgres";
-	private static final String DB_PASSWORD = "4061950";
-	public JDateChooser dateChooser;
-	private PreparedStatement enviaConsultaCurso;
-	private final String consultaCursos = "SELECT empleado, fecha, curso, alumno, descripcion, justificativo FROM asistencia_curso WHERE curso = ?";
 
 	private JFrame frmRegistroDeAsistencia;
 
@@ -167,6 +156,22 @@ public class AsistenciaPorCursoView {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+
+				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
+
+				// campos
+
+				AsistenciaPorCursoDao asistCursoDao = new AsistenciaPorCursoDao();
+				Boolean isDeleted = asistCursoDao.eliminarAsistencia(asistCurso);
+
+				if (isDeleted) {
+					JOptionPane.showMessageDialog(null, "Registro eliminado correctamente.", "",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo eliminar el registro.", null,
+							JOptionPane.ERROR_MESSAGE, null);
+				}
+
 			}
 		});
 		btnEliminar.setBounds(124, 457, 89, 23);
@@ -181,15 +186,38 @@ public class AsistenciaPorCursoView {
 		btnActualizar.setBounds(223, 457, 116, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnActualizar);
 
-		JComboBox cmbEmpleado = new JComboBox();
+		CursoDao cursoDao = new CursoDao();
+		AlumnoDao alumnoDao = new AlumnoDao();
+		EmpleadoDao empleadoDao = new EmpleadoDao();
+
+		// EMPLEADO
+		List<Empleado> empleados = empleadoDao.recuperarEmpleados();
+		ArrayList<String> stringComboEmpleado = new ArrayList<>();
+		for (Empleado empleado : empleados) {
+			stringComboEmpleado.add(empleado.getNombre());
+		}
+
+		JComboBox<Empleado> cmbEmpleado = new JComboBox(stringComboEmpleado.toArray());
 		cmbEmpleado.setBounds(82, 134, 93, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbEmpleado);
 
-		JComboBox cmbCurso = new JComboBox();
+		// CURSO
+		List<Curso> cursos = cursoDao.recuperarCursos();
+		ArrayList<String> stringComboCurso = new ArrayList<>();
+		for (Curso curso : cursos) {
+			stringComboCurso.add(curso.getDecripcion());
+		}
+		JComboBox cmbCurso = new JComboBox(stringComboCurso.toArray());
 		cmbCurso.setBounds(80, 176, 93, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
 
-		JComboBox cmbAlumno = new JComboBox();
+		// ALUMNO
+		List<Alumno> alumnos = alumnoDao.recuperarAlumno();
+		ArrayList<String> stringComboAlumno = new ArrayList<>();
+		for (Alumno alumno : alumnos) {
+			stringComboAlumno.add(alumno.getNombre());
+		}
+		JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
 		cmbAlumno.setBounds(289, 176, 93, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
 
@@ -205,35 +233,18 @@ public class AsistenciaPorCursoView {
 
 				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
 				AsistenciaPorCursoDao asisteCursoDao = new AsistenciaPorCursoDao();
-				CursoDao cursoDao = new CursoDao();
-				AlumnoDao alumnoDao = new AlumnoDao();
-
 				try {
 
-					// FECHA - no funciona
+					// FECHA
 					Date date = dateChooser.getDate();
 					String fecha = DateFormat.getInstance().format(date);
 					asistCurso.setFecha(fecha);
 
-					// CURSO
+					//MPLEADO
 
-					List<Curso> cursos = cursoDao.recuperarCursos();
-					ArrayList<String> stringComboCurso = new ArrayList<>();
-					for (Curso curso : cursos) {
-						stringComboCurso.add(curso.getDecripcion());
-					}
-					JComboBox cmbCurso = new JComboBox(stringComboCurso.toArray());
+					//ALUMNO
 
-					// ALUMNO
-					List<Alumno> alumnos = alumnoDao.recuperarAlumno();
-					ArrayList<String> stringComboAlumno = new ArrayList<>();
-					for (Alumno alumno : alumnos) {
-						stringComboAlumno.add(alumno.getNombre());
-						stringComboAlumno.add(alumno.getApellido());
-					}
-					JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
-
-					// FALTAN DATOS!!!!
+					//CURSO
 
 					Boolean isInserted = asisteCursoDao.registrarAsistencia(asistCurso);
 
@@ -254,68 +265,5 @@ public class AsistenciaPorCursoView {
 			}
 
 		});
-
-		// Conexión
-
-		Connection dbConnection = null;
-
-		Statement statement = null;
-
-		try {
-
-			dbConnection = getDBConnection();
-			statement = dbConnection.createStatement();
-
-			// Carga ComboBox EMPLEADO
-			String consultaEmpleado = "SELECT empleado FROM asistencia_curso";
-			ResultSet Rs = statement.executeQuery(consultaEmpleado);
-
-			while (Rs.next()) {
-				extracted(cmbEmpleado, Rs);
-			}
-			Rs.close();
-
-			// Carga ComboBox CURSO
-			String consultaCursos = "SELECT curso FROM asistencia_curso";
-			ResultSet rs = statement.executeQuery(consultaCursos);
-
-			while (rs.next()) {
-				extracted(cmbCurso, rs);
-			}
-			rs.close();
-
-			// Carga ComboBox ALUMNO
-			String consultaAlumno = "SELECT alumno FROM asistencia_curso";
-			ResultSet rS = statement.executeQuery(consultaAlumno);
-
-			while (rS.next()) {
-				extracted(cmbAlumno, rS);
-			}
-			rs.close();
-
-		} catch (Exception e) {
-
-		}
-
-	}
-
-	private void extracted(JComboBox cmbCurso, ResultSet rs) throws SQLException {
-		cmbCurso.addItem(rs.getString(1));
-	}
-
-	private static Connection getDBConnection() {
-		Connection dbConnection = null;
-		try {
-			Class.forName(DB_DRIVER);
-		} catch (ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-		try {
-			dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-			return dbConnection;
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return dbConnection;
 	}
 }
