@@ -1,31 +1,27 @@
 package py.edu.uaa.pooj.siges_mtv.model;
 
 public abstract class Persona {
-	
+
 	@Override
 	public String toString() {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", numeroCedula=" + numeroCedula
-				+ ", direccion=" + direccion + ", contacto=" + contacto + ", nacionalidad=" + nacionalidad + "]";
+				+ ", nacionalidad=" + "]";
 	}
 
 	private String nombre;
 	private String apellido;
-	protected int numeroCedula;
-	protected Domicilio direccion;
-	protected Contacto contacto;
-	protected País nacionalidad;
+	private int numeroCedula;
+	// protected Domicilio direccion;
+	// protected Contacto contacto;
+	// protected País nacionalidad;
 
-	public Persona(String nombre, String apellido, int numeroCedula, Domicilio direccion, Contacto contacto,
-			País nacionalidad) {
-		
+	public Persona(String nombre, String apellido, int numeroCedula) {
+
 		super();
 
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.numeroCedula = numeroCedula;
-		this.direccion = direccion;
-		this.contacto = contacto;
-		this.nacionalidad = nacionalidad;
 	}
 
 	public Persona() {
@@ -56,30 +52,4 @@ public abstract class Persona {
 		this.numeroCedula = numeroCedula;
 	}
 
-	public Domicilio getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(Domicilio direccion) {
-		this.direccion = direccion;
-	}
-
-	public Contacto getContacto() {
-		return contacto;
-	}
-
-	public void setContacto(Contacto contacto) {
-		this.contacto = contacto;
-	}
-
-	public País getNacionalidad() {
-		return nacionalidad;
-	}
-
-	public void setNacionalidad(País nacionalidad) {
-		this.nacionalidad = nacionalidad;
-	}
-
-
-	
 }

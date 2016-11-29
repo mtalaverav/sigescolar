@@ -2,24 +2,20 @@ package py.edu.uaa.pooj.siges_mtv.model;
 
 import java.util.List;
 
-
 public class AsistenciaPorCurso {
+
 	@Override
 	public String toString() {
 		return "AsistenciaPorCurso [empleado=" + empleado + ", fecha=" + fecha + ", curso=" + curso + ", alumno="
-				+ alumno + ", descripcion=" + descripcion + ", justificativo=" + justificativo + ", alumnos=" + alumnos
-				+ "]";
+				+ alumno + ", descripcion=" + descripcion + ", justificativo=" + justificativo + "]";
 	}
 
-	
-	//cambiar tipo de datos.
 	private Empleado empleado;
 	private String fecha;
 	private Curso curso;
 	private Alumno alumno;
-	private Boolean descripcion;
+	private String descripcion;
 	private String justificativo;
-	private List <Alumno> alumnos;
 
 	public AsistenciaPorCurso() {
 
@@ -49,11 +45,11 @@ public class AsistenciaPorCurso {
 		this.alumno = alumno;
 	}
 
-	public Boolean getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(Boolean descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
@@ -72,15 +68,5 @@ public class AsistenciaPorCurso {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
-	public List <Alumno> getAlumnos() {
-		return alumnos;
-	}
-
-	public void setAlumnos(List <Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
-	
-	
 
 }

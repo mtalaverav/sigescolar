@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -198,6 +199,8 @@ public class AsistenciaPorCursoView {
 		}
 
 		JComboBox<Empleado> cmbEmpleado = new JComboBox(stringComboEmpleado.toArray());
+		
+		
 		cmbEmpleado.setBounds(82, 134, 93, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbEmpleado);
 
@@ -240,11 +243,20 @@ public class AsistenciaPorCursoView {
 					String fecha = DateFormat.getInstance().format(date);
 					asistCurso.setFecha(fecha);
 
-					//MPLEADO
-
+					//EMPLEADO
+					Empleado emp = new Empleado();
+					emp.setNombre(cmbEmpleado.getSelectedItem().toString());
+					asistCurso.setEmpleado(emp);
+					
 					//ALUMNO
-
+					Alumno alm = new Alumno ();
+					alm.setNombre(cmbAlumno.getSelectedItem().toString());
+					asistCurso.setAlumno(alm);
+					
 					//CURSO
+					Curso crs = new Curso ();
+					crs.setDecripcion(cmbCurso.getSelectedItem().toString());
+					asistCurso.setCurso(crs);
 
 					Boolean isInserted = asisteCursoDao.registrarAsistencia(asistCurso);
 

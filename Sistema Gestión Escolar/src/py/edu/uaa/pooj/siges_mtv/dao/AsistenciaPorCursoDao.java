@@ -40,7 +40,7 @@ public class AsistenciaPorCursoDao {
 				AsistenciaPorCurso asistcurso = new AsistenciaPorCurso();
 
 				// Empleado
-				
+
 				String codigoEmpleado = rs.getString(1);
 				if (codigoEmpleado != null) {
 					Empleado empleado = this.empleadoDao.recuperarEmpleadoPorCodigo(codigoEmpleado);
@@ -93,8 +93,8 @@ public class AsistenciaPorCursoDao {
 		PreparedStatement preparedStatement = null;
 
 		// AGREGAR FECHA, DESCRIPCION Y JUSTIFICATIVO
-		String insertTableSQL = "INSERT INTO asistencia_curso" + "( empleado, fecha, curso, alumno ) VALUES"
-				+ "(?, ?, ?, ?)";
+		String insertTableSQL = "INSERT INTO asistencia_curso"
+				+ "( empleado, fecha, curso, alumno, descripcion, justificativo) VALUES" + "(?, ?, ?, ?, ?, ?)";
 
 		try {
 			dbConnection = getDBConnection();
@@ -102,12 +102,11 @@ public class AsistenciaPorCursoDao {
 
 			// EMPLEADO
 			if (asistencia_curso.getEmpleado() != null) {
-				preparedStatement.setString(1, asistencia_curso.getEmpleado().getCodigo());
+				preparedStatement.setString(1, asistencia_curso.getEmpleado().getNombre());
 			} else {
 				preparedStatement.setNull(1, Types.CHAR);
 			}
-			
-			
+
 			// FECHA
 			if (asistencia_curso.getFecha() != null) {
 				preparedStatement.setString(2, asistencia_curso.getFecha());
@@ -117,17 +116,20 @@ public class AsistenciaPorCursoDao {
 
 			// CURSO
 			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(3, asistencia_curso.getCurso().getCodigo());
+				preparedStatement.setString(3, asistencia_curso.getCurso().getDecripcion());
 			} else {
 				preparedStatement.setNull(3, Types.CHAR);
 			}
 
 			// Alumno
 			if (asistencia_curso.getAlumno() != null) {
-				preparedStatement.setString(4, asistencia_curso.getAlumno().getCodigo());
+				preparedStatement.setString(4, asistencia_curso.getAlumno().getNombre());
 			} else {
 				preparedStatement.setNull(4, Types.CHAR);
 			}
+
+			preparedStatement.setString(5, asistencia_curso.getDescripcion());
+			preparedStatement.setString(6, asistencia_curso.getJustificativo());
 
 			preparedStatement.executeUpdate();
 			System.out.println("Registro correcto de datos.");
@@ -211,8 +213,8 @@ public class AsistenciaPorCursoDao {
 			} else {
 				preparedStatement.setNull(1, Types.CHAR);
 			}
-			
-//			preparedStatement.setString(1, asistencia_curso.getEmpleado());
+
+			// preparedStatement.setString(1, asistencia_curso.getEmpleado());
 
 			// CURSO
 			if (asistencia_curso.getCurso() != null) {
