@@ -18,7 +18,8 @@ public class ModificaBBDD {
 //			String insertEmpleadoSQL = "INSERT INTO empleado (nombre, apellido) VALUES ('Jessica', 'Coronel')";
 //			miStatement.executeUpdate(insertEmpleadoSQL);
 			
-			String insertAlumnoSQL =  "INSERT INTO alumno (nombre, apellido, numerocedula) VALUES ('Melissa', 'Talavera', 4061950)";
+			String insertAlumnoSQL =  "INSERT INTO alumno (nombre, apellido, numerocedula)"
+					+ "VALUES ('Carlos', 'Escobar', 76543)";
 			miStatement.executeQuery(insertAlumnoSQL);
 			
 			//

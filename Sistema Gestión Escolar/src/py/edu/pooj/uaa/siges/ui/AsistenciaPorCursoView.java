@@ -245,17 +245,20 @@ public class AsistenciaPorCursoView {
 
 					//EMPLEADO
 					Empleado emp = new Empleado();
-					emp.setNombre(cmbEmpleado.getSelectedItem().toString());
+					emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
+					//emp.setNombre(cmbEmpleado.getSelectedItem().toString());
 					asistCurso.setEmpleado(emp);
 					
 					//ALUMNO
 					Alumno alm = new Alumno ();
-					alm.setNombre(cmbAlumno.getSelectedItem().toString());
+					//alm.setNombre(cmbAlumno.getSelectedItem().toString());
+					alm.setCodigo(cmbAlumno.getSelectedItem().toString());
 					asistCurso.setAlumno(alm);
 					
 					//CURSO
 					Curso crs = new Curso ();
-					crs.setDecripcion(cmbCurso.getSelectedItem().toString());
+					//crs.setDecripcion(cmbCurso.getSelectedItem().toString());
+					crs.setCodigo(cmbCurso.getSelectedItem().toString());
 					asistCurso.setCurso(crs);
 
 					Boolean isInserted = asisteCursoDao.registrarAsistencia(asistCurso);

@@ -8,32 +8,35 @@ import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
 import py.edu.uaa.pooj.siges_mtv.model.Empleado;
 
-public class TestJDBC {
+public class TestInsertar {
 
 	public static void main(String[] args) {
 
+		// INSERTAR
+
 		Empleado empleado = new Empleado();
+		empleado.setCodigo("JF");
 		empleado.setNombre("José");
 		empleado.setApellido("Flores");
 		empleado.setNumeroCedula(1234567);
-		
 
-		Alumno alumno = new Alumno();
-		alumno.setApellido("Melissa");
-		alumno.setApellido("Talavera");
-		alumno.setNumeroCedula(4061950);
+		Alumno alm = new Alumno();
+		alm.setCodigo("ND");
+		alm.setNombre("Norma");
+		alm.setApellido("Delvalle");
+		alm.setNumeroCedula(1026650);
 
 		Curso curso = new Curso();
-		curso.setCodigo("p");
-		curso.setDecripcion("Primero");
+		curso.setCodigo("S");
+		curso.setDecripcion("Segundo");
 
 		AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
 		asistCurso.setEmpleado(empleado);
-		asistCurso.setFecha("21/03/2016");
+		asistCurso.setFecha("22/03/2016");
 		asistCurso.setCurso(curso);
-		asistCurso.setAlumno(alumno);
-		asistCurso.setDescripcion("Sí");
-		asistCurso.setJustificativo("");
+		asistCurso.setAlumno(alm);
+		asistCurso.setDescripcion("No");
+		asistCurso.setJustificativo("Laboral");
 
 		AsistenciaPorCursoDao asistDao = new AsistenciaPorCursoDao();
 		try {
@@ -43,5 +46,4 @@ public class TestJDBC {
 		}
 
 	}
-
 }

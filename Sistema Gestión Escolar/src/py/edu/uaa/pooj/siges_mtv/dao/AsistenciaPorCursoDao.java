@@ -92,7 +92,6 @@ public class AsistenciaPorCursoDao {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
-		// AGREGAR FECHA, DESCRIPCION Y JUSTIFICATIVO
 		String insertTableSQL = "INSERT INTO asistencia_curso"
 				+ "( empleado, fecha, curso, alumno, descripcion, justificativo) VALUES" + "(?, ?, ?, ?, ?, ?)";
 
@@ -102,7 +101,7 @@ public class AsistenciaPorCursoDao {
 
 			// EMPLEADO
 			if (asistencia_curso.getEmpleado() != null) {
-				preparedStatement.setString(1, asistencia_curso.getEmpleado().getNombre());
+				preparedStatement.setString(1, asistencia_curso.getEmpleado().getCodigo());
 			} else {
 				preparedStatement.setNull(1, Types.CHAR);
 			}
@@ -116,14 +115,14 @@ public class AsistenciaPorCursoDao {
 
 			// CURSO
 			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(3, asistencia_curso.getCurso().getDecripcion());
+				preparedStatement.setString(3, asistencia_curso.getCurso().getCodigo());
 			} else {
 				preparedStatement.setNull(3, Types.CHAR);
 			}
 
 			// Alumno
 			if (asistencia_curso.getAlumno() != null) {
-				preparedStatement.setString(4, asistencia_curso.getAlumno().getNombre());
+				preparedStatement.setString(4, asistencia_curso.getAlumno().getCodigo());
 			} else {
 				preparedStatement.setNull(4, Types.CHAR);
 			}
@@ -155,17 +154,16 @@ public class AsistenciaPorCursoDao {
 	public boolean eliminarAsistencia(AsistenciaPorCurso asistencia_curso) {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
-		String deleteSQL = "DELETE from asist_curso WHERE alumno = ?";
+		String deleteSQL = "DELETE from asistencia_curso WHERE fecha = ?";
 
 		try {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(deleteSQL);
 
-			// preparedStatement.setObject(1, asistencia_curso.getAlumno());
-			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(4, asistencia_curso.getCurso().getCodigo());
+			if (asistencia_curso.getFecha() != null) {
+				preparedStatement.setString(1, asistencia_curso.getFecha());
 			} else {
-				preparedStatement.setNull(4, Types.CHAR);
+				preparedStatement.setNull(1, Types.CHAR);
 			}
 
 			// execute delete SQL stetement
@@ -201,34 +199,14 @@ public class AsistenciaPorCursoDao {
 		PreparedStatement preparedStatement = null;
 		// los parametros del where son en base a la necesidad de la logica de
 		// negocio.
-		String updateSql = "UPDATE asistencia_curso set empleado = ?, curso = ?, alumno = ?, WHERE alumno = ?";
+		String updateSql = "UPDATE asistencia_curso set descripcion = ?, justificativo = ?, , WHERE alumno = ?";
 
 		try {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(updateSql);
 
-			// EMPLEADO
-			if (asistencia_curso.getEmpleado() != null) {
-				preparedStatement.setString(1, asistencia_curso.getEmpleado().getCodigo());
-			} else {
-				preparedStatement.setNull(1, Types.CHAR);
-			}
-
-			// preparedStatement.setString(1, asistencia_curso.getEmpleado());
-
-			// CURSO
-			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(4, asistencia_curso.getCurso().getCodigo());
-			} else {
-				preparedStatement.setNull(4, Types.CHAR);
-			}
-
-			// Alumno
-			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(4, asistencia_curso.getAlumno().getCodigo());
-			} else {
-				preparedStatement.setNull(4, Types.CHAR);
-			}
+			preparedStatement.setString(1, asistencia_curso.getDescripcion());
+			preparedStatement.setString(2, asistencia_curso.getJustificativo());
 
 			// execute delete SQL stetement
 			preparedStatement.executeUpdate();
