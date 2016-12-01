@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -77,6 +76,11 @@ public class AsistenciaPorCursoView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		CursoDao cursoDao = new CursoDao();
+		AlumnoDao alumnoDao = new AlumnoDao();
+		EmpleadoDao empleadoDao = new EmpleadoDao();
+
 		frmRegistroDeAsistencia = new JFrame();
 		frmRegistroDeAsistencia.setFont(new Font("Arial", Font.PLAIN, 12));
 		frmRegistroDeAsistencia.setBackground(Color.CYAN);
@@ -84,24 +88,14 @@ public class AsistenciaPorCursoView {
 				.getImage("C:\\Users\\USER\\git\\Sistema Gesti\u00F3n Escolar\\asistencia.png"));
 		frmRegistroDeAsistencia.setTitle("Registro de Asistencia");
 		frmRegistroDeAsistencia.getContentPane().setBackground(new Color(255, 255, 204));
-		frmRegistroDeAsistencia.setBounds(100, 100, 505, 643);
+		frmRegistroDeAsistencia.setBounds(100, 100, 413, 644);
 		frmRegistroDeAsistencia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeAsistencia.getContentPane().setLayout(null);
 
 		JLabel lblRegistroDeAsistencia = new JLabel("Registro de Asistencia Por Curso");
-		lblRegistroDeAsistencia.setBounds(124, 0, 215, 35);
+		lblRegistroDeAsistencia.setFont(new Font("Century Gothic", Font.BOLD, 14));
+		lblRegistroDeAsistencia.setBounds(109, 11, 227, 46);
 		frmRegistroDeAsistencia.getContentPane().add(lblRegistroDeAsistencia);
-
-		JButton btnAbrirConsulta = new JButton("Informe");
-		btnAbrirConsulta.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AsistenciaPorCursoConsultaView window = new AsistenciaPorCursoConsultaView();
-				window.frmInformeAsistenciaDe.setVisible(true);
-			}
-		});
-		btnAbrirConsulta.setBounds(365, 457, 89, 23);
-		frmRegistroDeAsistencia.getContentPane().add(btnAbrirConsulta);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addMouseListener(new MouseAdapter() {
@@ -110,39 +104,39 @@ public class AsistenciaPorCursoView {
 				confirmar();
 			}
 		});
-		btnCancelar.setBounds(378, 543, 89, 23);
+		btnCancelar.setBounds(262, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnCancelar);
 
 		JLabel lblEmpleado = new JLabel("Empleado");
-		lblEmpleado.setBounds(10, 137, 62, 14);
+		lblEmpleado.setBounds(74, 154, 62, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblEmpleado);
 
 		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setBounds(10, 60, 46, 14);
+		lblFecha.setBounds(74, 108, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblFecha);
 
 		JLabel lblCurso = new JLabel("Curso");
-		lblCurso.setBounds(10, 179, 46, 14);
+		lblCurso.setBounds(74, 198, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblCurso);
 
 		JLabel lblJustificativo = new JLabel("Justificativo");
-		lblJustificativo.setBounds(30, 358, 72, 14);
+		lblJustificativo.setBounds(64, 414, 72, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblJustificativo);
 
 		JTextPane txtpnCargaJuistificación = new JTextPane();
 		txtpnCargaJuistificación.setText("Describa la justificaci\u00F3n.");
-		txtpnCargaJuistificación.setBounds(111, 358, 191, 58);
+		txtpnCargaJuistificación.setBounds(109, 449, 191, 58);
 		frmRegistroDeAsistencia.getContentPane().add(txtpnCargaJuistificación);
 
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setToolTipText("");
-		dateChooser.setBounds(80, 60, 95, 20);
+		dateChooser.setBounds(195, 102, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(dateChooser);
 
 		JPanel opcionesDescripcion = new JPanel();
 		opcionesDescripcion.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Descripci\u00F3n",
 				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		opcionesDescripcion.setBounds(10, 234, 188, 58);
+		opcionesDescripcion.setBounds(92, 316, 188, 58);
 		frmRegistroDeAsistencia.getContentPane().add(opcionesDescripcion);
 
 		JRadioButton optSi = new JRadioButton("S\u00ED");
@@ -152,44 +146,9 @@ public class AsistenciaPorCursoView {
 		JRadioButton optNo = new JRadioButton("No");
 		opcionesDescripcion.add(optNo);
 
-		// FALTA
-		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
-
-				// campos
-
-				AsistenciaPorCursoDao asistCursoDao = new AsistenciaPorCursoDao();
-				Boolean isDeleted = asistCursoDao.eliminarAsistencia(asistCurso);
-
-				if (isDeleted) {
-					JOptionPane.showMessageDialog(null, "Registro eliminado correctamente.", "",
-							JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "No se pudo eliminar el registro.", null,
-							JOptionPane.ERROR_MESSAGE, null);
-				}
-
-			}
-		});
-		btnEliminar.setBounds(124, 457, 89, 23);
-		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
-
-		JButton btnActualizar = new JButton("Actualizar");
-		btnActualizar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		btnActualizar.setBounds(223, 457, 116, 23);
-		frmRegistroDeAsistencia.getContentPane().add(btnActualizar);
-
-		CursoDao cursoDao = new CursoDao();
-		AlumnoDao alumnoDao = new AlumnoDao();
-		EmpleadoDao empleadoDao = new EmpleadoDao();
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setBounds(31, 553, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
 
 		// EMPLEADO
 		List<Empleado> empleados = empleadoDao.recuperarEmpleados();
@@ -197,11 +156,8 @@ public class AsistenciaPorCursoView {
 		for (Empleado empleado : empleados) {
 			stringComboEmpleado.add(empleado.getNombre());
 		}
-
 		JComboBox<Empleado> cmbEmpleado = new JComboBox(stringComboEmpleado.toArray());
-		
-		
-		cmbEmpleado.setBounds(82, 134, 93, 20);
+		cmbEmpleado.setBounds(195, 151, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbEmpleado);
 
 		// CURSO
@@ -211,8 +167,12 @@ public class AsistenciaPorCursoView {
 			stringComboCurso.add(curso.getDecripcion());
 		}
 		JComboBox cmbCurso = new JComboBox(stringComboCurso.toArray());
-		cmbCurso.setBounds(80, 176, 93, 20);
+		cmbCurso.setBounds(195, 195, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
+
+		JLabel lblAlumno = new JLabel("Alumno ");
+		lblAlumno.setBounds(74, 245, 46, 14);
+		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
 
 		// ALUMNO
 		List<Alumno> alumnos = alumnoDao.recuperarAlumno();
@@ -221,16 +181,52 @@ public class AsistenciaPorCursoView {
 			stringComboAlumno.add(alumno.getNombre());
 		}
 		JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
-		cmbAlumno.setBounds(289, 176, 93, 20);
+		cmbAlumno.setBounds(195, 242, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
 
-		JLabel lblAlumno = new JLabel("Alumno");
-		lblAlumno.setBounds(233, 179, 46, 14);
-		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
+				// FECHA
+				Date date = dateChooser.getDate();
+				String fecha = DateFormat.getInstance().format(date);
+				asistCurso.setFecha(fecha);
 
-		JButton btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setBounds(13, 457, 89, 23);
-		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
+				// EMPLEADO
+				Empleado emp = new Empleado();
+				emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
+				// emp.setNombre(cmbEmpleado.getSelectedItem().toString());
+				asistCurso.setEmpleado(emp);
+
+				// ALUMNO
+				Alumno alm = new Alumno();
+				// alm.setNombre(cmbAlumno.getSelectedItem().toString());
+				alm.setCodigo(cmbAlumno.getSelectedItem().toString());
+				asistCurso.setAlumno(alm);
+
+				// CURSO
+				Curso crs = new Curso();
+				// crs.setDecripcion(cmbCurso.getSelectedItem().toString());
+				crs.setCodigo(cmbCurso.getSelectedItem().toString());
+				asistCurso.setCurso(crs);
+
+				AsistenciaPorCursoDao asistDao = new AsistenciaPorCursoDao();
+				Boolean isDeleted = asistDao.eliminarAsistencia(asistCurso);
+
+				if (isDeleted) {
+					JOptionPane.showMessageDialog(null, "Eliminado correctamente", "", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo eliminar el registro", null,
+							JOptionPane.ERROR_MESSAGE, null);
+				}
+
+			}
+		});
+		btnEliminar.setBounds(142, 553, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
+
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -243,32 +239,32 @@ public class AsistenciaPorCursoView {
 					String fecha = DateFormat.getInstance().format(date);
 					asistCurso.setFecha(fecha);
 
-					//EMPLEADO
+					// EMPLEADO
 					Empleado emp = new Empleado();
 					emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
-					//emp.setNombre(cmbEmpleado.getSelectedItem().toString());
+					// emp.setNombre(cmbEmpleado.getSelectedItem().toString());
 					asistCurso.setEmpleado(emp);
-					
-					//ALUMNO
-					Alumno alm = new Alumno ();
-					//alm.setNombre(cmbAlumno.getSelectedItem().toString());
+
+					// ALUMNO
+					Alumno alm = new Alumno();
+					// alm.setNombre(cmbAlumno.getSelectedItem().toString());
 					alm.setCodigo(cmbAlumno.getSelectedItem().toString());
 					asistCurso.setAlumno(alm);
-					
-					//CURSO
-					Curso crs = new Curso ();
-					//crs.setDecripcion(cmbCurso.getSelectedItem().toString());
+
+					// CURSO
+					Curso crs = new Curso();
+					// crs.setDecripcion(cmbCurso.getSelectedItem().toString());
 					crs.setCodigo(cmbCurso.getSelectedItem().toString());
 					asistCurso.setCurso(crs);
 
 					Boolean isInserted = asisteCursoDao.registrarAsistencia(asistCurso);
 
 					if (isInserted) {
-						JOptionPane.showMessageDialog(null, "Alumno insertado correctamente", "",
+						JOptionPane.showMessageDialog(null, "Registrado correctamente", "",
 								JOptionPane.INFORMATION_MESSAGE);
 
 					} else {
-						JOptionPane.showMessageDialog(null, "No se pudo insertar el registro del alumno", null,
+						JOptionPane.showMessageDialog(null, "No se pudo insertar el registro", null,
 								JOptionPane.ERROR_MESSAGE, null);
 					}
 

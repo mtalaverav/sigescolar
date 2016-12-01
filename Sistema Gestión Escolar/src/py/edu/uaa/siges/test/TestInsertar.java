@@ -13,7 +13,6 @@ public class TestInsertar {
 	public static void main(String[] args) {
 
 		// INSERTAR
-
 		Empleado empleado = new Empleado();
 		empleado.setCodigo("JF");
 		empleado.setNombre("José");
@@ -21,9 +20,9 @@ public class TestInsertar {
 		empleado.setNumeroCedula(1234567);
 
 		Alumno alm = new Alumno();
-		alm.setCodigo("ND");
-		alm.setNombre("Norma");
-		alm.setApellido("Delvalle");
+		alm.setCodigo("C2");
+		alm.setNombre("Camila");
+		alm.setApellido("Castillo");
 		alm.setNumeroCedula(1026650);
 
 		Curso curso = new Curso();
@@ -32,11 +31,11 @@ public class TestInsertar {
 
 		AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
 		asistCurso.setEmpleado(empleado);
-		asistCurso.setFecha("22/03/2016");
+		asistCurso.setFecha("22/05/2016");
 		asistCurso.setCurso(curso);
 		asistCurso.setAlumno(alm);
-		asistCurso.setDescripcion("No");
-		asistCurso.setJustificativo("Laboral");
+		asistCurso.setDescripcion("Si");
+		asistCurso.setJustificativo(" ");
 
 		AsistenciaPorCursoDao asistDao = new AsistenciaPorCursoDao();
 		try {

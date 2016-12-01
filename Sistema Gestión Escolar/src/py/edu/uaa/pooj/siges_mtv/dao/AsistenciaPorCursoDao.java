@@ -199,7 +199,7 @@ public class AsistenciaPorCursoDao {
 		PreparedStatement preparedStatement = null;
 		// los parametros del where son en base a la necesidad de la logica de
 		// negocio.
-		String updateSql = "UPDATE asistencia_curso set descripcion = ?, justificativo = ?, , WHERE alumno = ?";
+		String updateSql = "UPDATE asistencia_curso set descripcion = ?, justificativo = ? WHERE alumno = ?";
 
 		try {
 			dbConnection = getDBConnection();
