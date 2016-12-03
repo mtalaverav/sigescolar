@@ -207,6 +207,14 @@ public class AsistenciaPorCursoDao {
 
 			preparedStatement.setString(1, asistencia_curso.getDescripcion());
 			preparedStatement.setString(2, asistencia_curso.getJustificativo());
+			
+			if (asistencia_curso.getAlumno() != null) {
+				preparedStatement.setString(3, asistencia_curso.getAlumno().getCodigo());
+			} else {
+				preparedStatement.setNull(4, Types.CHAR);
+			}
+			
+			
 
 			// execute delete SQL stetement
 			preparedStatement.executeUpdate();
