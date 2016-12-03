@@ -34,6 +34,7 @@ import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
 import py.edu.uaa.pooj.siges_mtv.model.Empleado;
+import javax.swing.ImageIcon;
 
 public class AsistenciaPorCursoView {
 
@@ -88,13 +89,13 @@ public class AsistenciaPorCursoView {
 				.getImage("C:\\Users\\USER\\git\\Sistema Gesti\u00F3n Escolar\\asistencia.png"));
 		frmRegistroDeAsistencia.setTitle("Registro de Asistencia");
 		frmRegistroDeAsistencia.getContentPane().setBackground(new Color(255, 255, 204));
-		frmRegistroDeAsistencia.setBounds(100, 100, 413, 644);
+		frmRegistroDeAsistencia.setBounds(100, 100, 384, 644);
 		frmRegistroDeAsistencia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeAsistencia.getContentPane().setLayout(null);
 
 		JLabel lblRegistroDeAsistencia = new JLabel("Registro de Asistencia Por Curso");
 		lblRegistroDeAsistencia.setFont(new Font("Century Gothic", Font.BOLD, 14));
-		lblRegistroDeAsistencia.setBounds(109, 11, 227, 46);
+		lblRegistroDeAsistencia.setBounds(74, 32, 227, 46);
 		frmRegistroDeAsistencia.getContentPane().add(lblRegistroDeAsistencia);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -240,7 +241,7 @@ public class AsistenciaPorCursoView {
 
 			}
 		});
-		btnEliminar.setBounds(142, 553, 89, 23);
+		btnEliminar.setBounds(148, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
 		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
