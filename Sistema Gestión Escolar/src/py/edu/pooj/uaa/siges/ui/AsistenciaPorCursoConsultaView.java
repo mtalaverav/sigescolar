@@ -156,7 +156,6 @@ public class AsistenciaPorCursoConsultaView {
 			rs.close();
 
 			// Carga ComboBox Descripcion
-
 			String consultaDescripcion = "SELECT DISTINCT descripcion FROM asistencia_curso";
 			ResultSet rS = statement.executeQuery(consultaDescripcion);
 

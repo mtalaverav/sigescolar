@@ -39,9 +39,6 @@ public class AsistenciaPorCursoView {
 
 	private JFrame frmRegistroDeAsistencia;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -316,12 +313,12 @@ public class AsistenciaPorCursoView {
 		btnActualizar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnActualizar.setBounds(147, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnActualizar);
-		
+
 		JButton btnInform = new JButton("Informe");
 		btnInform.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AsistenciaPorCursoConsultaView visible = new AsistenciaPorCursoConsultaView ();
+				AsistenciaPorCursoConsultaView visible = new AsistenciaPorCursoConsultaView();
 				visible.frmInformeAsistenciaDe.setVisible(true);
 			}
 		});
