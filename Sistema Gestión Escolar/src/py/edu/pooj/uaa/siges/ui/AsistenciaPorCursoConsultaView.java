@@ -147,7 +147,7 @@ public class AsistenciaPorCursoConsultaView {
 
 			// Carga ComboBox CURSO
 
-			String consultaCursos = "SELECT curso FROM asistencia_curso";
+			String consultaCursos = "SELECT DISTINCT curso FROM asistencia_curso";
 			ResultSet rs = statement.executeQuery(consultaCursos);
 
 			while (rs.next()) {
@@ -157,7 +157,7 @@ public class AsistenciaPorCursoConsultaView {
 
 			// Carga ComboBox Descripcion
 
-			String consultaDescripcion = "SELECT descripcion FROM asistencia_curso";
+			String consultaDescripcion = "SELECT DISTINCT descripcion FROM asistencia_curso";
 			ResultSet rS = statement.executeQuery(consultaDescripcion);
 
 			while (rS.next()) {
