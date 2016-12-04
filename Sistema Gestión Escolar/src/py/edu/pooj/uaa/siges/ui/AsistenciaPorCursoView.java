@@ -17,12 +17,12 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -34,7 +34,6 @@ import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
 import py.edu.uaa.pooj.siges_mtv.model.Empleado;
-import javax.swing.ImageIcon;
 
 public class AsistenciaPorCursoView {
 
@@ -89,51 +88,50 @@ public class AsistenciaPorCursoView {
 				.getImage("C:\\Users\\USER\\git\\Sistema Gesti\u00F3n Escolar\\asistencia.png"));
 		frmRegistroDeAsistencia.setTitle("Registro de Asistencia");
 		frmRegistroDeAsistencia.getContentPane().setBackground(new Color(255, 255, 204));
-		frmRegistroDeAsistencia.setBounds(100, 100, 384, 644);
+		frmRegistroDeAsistencia.setBounds(100, 100, 403, 691);
 		frmRegistroDeAsistencia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeAsistencia.getContentPane().setLayout(null);
 
 		JLabel lblRegistroDeAsistencia = new JLabel("Registro de Asistencia Por Curso");
 		lblRegistroDeAsistencia.setFont(new Font("Century Gothic", Font.BOLD, 14));
-		lblRegistroDeAsistencia.setBounds(74, 32, 227, 46);
+		lblRegistroDeAsistencia.setBounds(74, 23, 227, 46);
 		frmRegistroDeAsistencia.getContentPane().add(lblRegistroDeAsistencia);
 
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				confirmar();
 			}
 		});
-		btnCancelar.setBounds(262, 553, 89, 23);
+		btnCancelar.setBounds(274, 599, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnCancelar);
 
 		JLabel lblEmpleado = new JLabel("Empleado");
+		lblEmpleado.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		lblEmpleado.setBounds(74, 154, 62, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblEmpleado);
 
 		JLabel lblFecha = new JLabel("Fecha");
+		lblFecha.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		lblFecha.setBounds(74, 108, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblFecha);
 
 		JLabel lblCurso = new JLabel("Curso");
+		lblCurso.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		lblCurso.setBounds(74, 198, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblCurso);
 
 		JLabel lblJustificativo = new JLabel("Justificativo");
-		lblJustificativo.setBounds(64, 376, 72, 14);
+		lblJustificativo.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		lblJustificativo.setBounds(74, 376, 72, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblJustificativo);
-
-		JTextPane txtpnCargaJuistificación = new JTextPane();
-		txtpnCargaJuistificación.setText("Describa la justificaci\u00F3n.");
-		txtpnCargaJuistificación.setBounds(109, 428, 191, 58);
-		frmRegistroDeAsistencia.getContentPane().add(txtpnCargaJuistificación);
 
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setToolTipText("");
 		dateChooser.setBounds(195, 102, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(dateChooser);
-
 
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(255, 255, 204));
@@ -142,8 +140,10 @@ public class AsistenciaPorCursoView {
 		panel.setBounds(195, 293, 62, 66);
 
 		JRadioButton optSi = new JRadioButton("S\u00ED", true);
+		optSi.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		optSi.setBackground(new Color(255, 255, 204));
 		JRadioButton optNo = new JRadioButton("No", false);
+		optNo.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		optNo.setBackground(new Color(255, 255, 204));
 
 		descripcionAsist.add(optSi);
@@ -151,10 +151,9 @@ public class AsistenciaPorCursoView {
 		panel.add(optSi);
 		panel.add(optNo);
 		frmRegistroDeAsistencia.getContentPane().add(panel);
-		
-		
 
 		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnRegistrar.setBounds(31, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
 
@@ -179,6 +178,7 @@ public class AsistenciaPorCursoView {
 		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
 
 		JLabel lblAlumno = new JLabel("Alumno ");
+		lblAlumno.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		lblAlumno.setBounds(74, 245, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
 
@@ -193,6 +193,7 @@ public class AsistenciaPorCursoView {
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
 
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -216,8 +217,8 @@ public class AsistenciaPorCursoView {
 				Curso crs = new Curso();
 				crs.setCodigo(cmbCurso.getSelectedItem().toString());
 				asistCurso.setCurso(crs);
-				
-				//DESCRIPCION
+
+				// DESCRIPCION
 				String descripcionAsistencia = null;
 				if (optSi.isSelected()) {
 					descripcionAsistencia = "Sí";
@@ -227,7 +228,6 @@ public class AsistenciaPorCursoView {
 					descripcionAsistencia = "No";
 					asistCurso.setDescripcion(descripcionAsistencia);
 				}
-
 
 				AsistenciaPorCursoDao asistDao = new AsistenciaPorCursoDao();
 				Boolean isDeleted = asistDao.eliminarAsistencia(asistCurso);
@@ -241,12 +241,93 @@ public class AsistenciaPorCursoView {
 
 			}
 		});
-		btnEliminar.setBounds(148, 553, 89, 23);
+		btnEliminar.setBounds(274, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
-		
+
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
+		lblDescripcin.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		lblDescripcin.setBounds(74, 293, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblDescripcin);
+
+		JEditorPane dtrpnDescribaLaJustificacin = new JEditorPane();
+		dtrpnDescribaLaJustificacin.setText("Describa la justificaci\u00F3n.\r\n");
+		dtrpnDescribaLaJustificacin.setToolTipText("");
+		dtrpnDescribaLaJustificacin.setBackground(new Color(255, 255, 255));
+		dtrpnDescribaLaJustificacin.setBounds(74, 407, 236, 89);
+		frmRegistroDeAsistencia.getContentPane().add(dtrpnDescribaLaJustificacin);
+
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
+				AsistenciaPorCursoDao asisteCursoDao = new AsistenciaPorCursoDao();
+
+				// FECHA
+				Date date = dateChooser.getDate();
+				String fecha = DateFormat.getInstance().format(date);
+				asistCurso.setFecha(fecha);
+
+				// EMPLEADO
+				Empleado emp = new Empleado();
+				emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
+				// emp.setNombre(cmbEmpleado.getSelectedItem().toString());
+				asistCurso.setEmpleado(emp);
+
+				// ALUMNO
+				Alumno alm = new Alumno();
+				// alm.setNombre(cmbAlumno.getSelectedItem().toString());
+				alm.setCodigo(cmbAlumno.getSelectedItem().toString());
+				asistCurso.setAlumno(alm);
+
+				// CURSO
+				Curso crs = new Curso();
+				// crs.setDecripcion(cmbCurso.getSelectedItem().toString());
+				crs.setCodigo(cmbCurso.getSelectedItem().toString());
+				asistCurso.setCurso(crs);
+
+				// DESCRIPCION
+				String descripcionAsistencia = null;
+				if (optSi.isSelected()) {
+					descripcionAsistencia = "Sí";
+					asistCurso.setDescripcion(descripcionAsistencia);
+				} else {
+					optSi.setSelected(false);
+					descripcionAsistencia = "No";
+					asistCurso.setDescripcion(descripcionAsistencia);
+				}
+
+				// JUSTIFICATIVO
+				asistCurso.setJustificativo(dtrpnDescribaLaJustificacin.getText().toString());
+
+				Boolean isUpdated = asisteCursoDao.actualizarAsistencia(asistCurso);
+
+				if (isUpdated) {
+					JOptionPane.showMessageDialog(null, "Actualizado correctamente", "",
+							JOptionPane.INFORMATION_MESSAGE);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo actualizar el registro", null,
+							JOptionPane.ERROR_MESSAGE, null);
+				}
+
+			}
+		});
+		btnActualizar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		btnActualizar.setBounds(147, 553, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnActualizar);
+		
+		JButton btnInform = new JButton("Informe");
+		btnInform.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AsistenciaPorCursoConsultaView visible = new AsistenciaPorCursoConsultaView ();
+				visible.frmInformeAsistenciaDe.setVisible(true);
+			}
+		});
+		btnInform.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		btnInform.setBounds(147, 600, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnInform);
 
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -277,8 +358,8 @@ public class AsistenciaPorCursoView {
 					// crs.setDecripcion(cmbCurso.getSelectedItem().toString());
 					crs.setCodigo(cmbCurso.getSelectedItem().toString());
 					asistCurso.setCurso(crs);
-					
-					//DESCRIPCION
+
+					// DESCRIPCION
 					String descripcionAsistencia = null;
 					if (optSi.isSelected()) {
 						descripcionAsistencia = "Sí";
@@ -288,6 +369,9 @@ public class AsistenciaPorCursoView {
 						descripcionAsistencia = "No";
 						asistCurso.setDescripcion(descripcionAsistencia);
 					}
+
+					// JUSTIFICATIVO
+					asistCurso.setJustificativo(dtrpnDescribaLaJustificacin.getText().toString());
 
 					Boolean isInserted = asisteCursoDao.registrarAsistencia(asistCurso);
 
@@ -310,8 +394,4 @@ public class AsistenciaPorCursoView {
 		});
 	}
 
-	private void add(JRadioButton optSi) {
-		// TODO Auto-generated method stub
-
-	}
 }

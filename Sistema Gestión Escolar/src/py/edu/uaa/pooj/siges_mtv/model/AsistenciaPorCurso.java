@@ -1,7 +1,5 @@
 package py.edu.uaa.pooj.siges_mtv.model;
 
-import java.util.List;
-
 public class AsistenciaPorCurso {
 
 	@Override
@@ -28,6 +26,14 @@ public class AsistenciaPorCurso {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+	
+	public String getJustificativo() {
+		return justificativo;
+	}
+
+	public void setJustificativo(String justificativo) {
+		this.justificativo = justificativo;
+	}
 
 	public Curso getCurso() {
 		return curso;
@@ -53,14 +59,6 @@ public class AsistenciaPorCurso {
 		this.descripcion = descripcion;
 	}
 
-	public String getJustificativo() {
-		return justificativo;
-	}
-
-	public void setJustificativo(String justificativo) {
-		this.justificativo = justificativo;
-	}
-
 	public String getFecha() {
 		return fecha;
 	}
@@ -68,5 +66,7 @@ public class AsistenciaPorCurso {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
+	
+	
+	
 }

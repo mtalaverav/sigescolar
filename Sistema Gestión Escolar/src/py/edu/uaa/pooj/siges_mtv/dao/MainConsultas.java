@@ -2,11 +2,8 @@ package py.edu.uaa.pooj.siges_mtv.dao;
 
 import java.util.List;
 
-import py.edu.uaa.pooj.siges_mtv.model.Alumno;
-import py.edu.uaa.pooj.siges_mtv.model.Contacto;
+import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
-import py.edu.uaa.pooj.siges_mtv.model.Especialidad;
-import py.edu.uaa.pooj.siges_mtv.model.Materia;
 import py.edu.uaa.pooj.siges_mtv.model.País;
 
 public class MainConsultas {
@@ -49,10 +46,13 @@ public class MainConsultas {
 //		for (País pais : paises) {
 //			System.out.println(pais.toString());
 //		}
-//
-//		System.out.println("\n");
-//		AsistenciaPorCursoDao asistencia = new AsistenciaPorCursoDao();
-//		asistencia.recuperarAsistencia();
+
+		System.out.println("\n");
+		AsistenciaPorCursoDao asistenciaDao = new AsistenciaPorCursoDao();
+		List<AsistenciaPorCurso> asistencias = asistenciaDao.recuperarAsistencia();
+		for (AsistenciaPorCurso  asistencia : asistencias) {
+			System.out.println(asistencia.toString());
+		}
 //
 //		System.out.println("\n");
 //		TurnoDao turno = new TurnoDao();
