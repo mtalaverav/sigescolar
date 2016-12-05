@@ -114,7 +114,7 @@ public class AsistenciaPorCursoDao {
 			}
 
 			// FECHA
-			if (asistencia_curso.getFecha() != null) {
+			if (asistencia_curso.getFecha() != null) {  
 				preparedStatement.setString(2, asistencia_curso.getFecha());
 			} else {
 				preparedStatement.setNull(2, Types.CHAR);

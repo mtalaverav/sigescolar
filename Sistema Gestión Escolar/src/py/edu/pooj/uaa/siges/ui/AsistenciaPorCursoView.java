@@ -188,6 +188,7 @@ public class AsistenciaPorCursoView {
 		JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
 		cmbAlumno.setBounds(195, 242, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
+		
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
@@ -240,6 +241,7 @@ public class AsistenciaPorCursoView {
 		});
 		btnEliminar.setBounds(274, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
+		
 
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
 		lblDescripcin.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
@@ -325,6 +327,17 @@ public class AsistenciaPorCursoView {
 		btnInform.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnInform.setBounds(147, 600, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnInform);
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		});
+		btnNuevo.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		btnNuevo.setBounds(31, 600, 89, 23);
+		frmRegistroDeAsistencia.getContentPane().add(btnNuevo);
 
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -389,6 +402,6 @@ public class AsistenciaPorCursoView {
 			}
 
 		});
-	}
 
+	}
 }

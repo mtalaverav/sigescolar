@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
 
 public class AsistenciaPorCursoConsultaView {
 
@@ -78,6 +79,7 @@ public class AsistenciaPorCursoConsultaView {
 	 */
 	private void initialize() {
 		frmInformeAsistenciaDe = new JFrame();
+		frmInformeAsistenciaDe.getContentPane().setBackground(new Color(255, 255, 204));
 		frmInformeAsistenciaDe.setIconImage(Toolkit.getDefaultToolkit()
 				.getImage("C:\\Users\\USER\\git\\Sistema Gesti\u00F3n Escolar\\Tutorial Apolo 4.0_html_m10daeb51.jpg"));
 		frmInformeAsistenciaDe.setTitle("Informe Asistencia de Alumnos");
