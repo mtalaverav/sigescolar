@@ -189,7 +189,6 @@ public class AsistenciaPorCursoView {
 		cmbAlumno.setBounds(195, 242, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
 		
-
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnEliminar.addMouseListener(new MouseAdapter() {
@@ -239,7 +238,7 @@ public class AsistenciaPorCursoView {
 
 			}
 		});
-		btnEliminar.setBounds(274, 553, 89, 23);
+		btnEliminar.setBounds(147, 599, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
 		
 
@@ -249,7 +248,6 @@ public class AsistenciaPorCursoView {
 		frmRegistroDeAsistencia.getContentPane().add(lblDescripcin);
 
 		JEditorPane dtrpnDescribaLaJustificacin = new JEditorPane();
-		dtrpnDescribaLaJustificacin.setText("Describa la justificaci\u00F3n.\r\n");
 		dtrpnDescribaLaJustificacin.setToolTipText("");
 		dtrpnDescribaLaJustificacin.setBackground(new Color(255, 255, 255));
 		dtrpnDescribaLaJustificacin.setBounds(74, 407, 236, 89);
@@ -325,19 +323,8 @@ public class AsistenciaPorCursoView {
 			}
 		});
 		btnInform.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		btnInform.setBounds(147, 600, 89, 23);
+		btnInform.setBounds(274, 553, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnInform);
-		
-		JButton btnNuevo = new JButton("Nuevo");
-		btnNuevo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-			}
-		});
-		btnNuevo.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		btnNuevo.setBounds(31, 600, 89, 23);
-		frmRegistroDeAsistencia.getContentPane().add(btnNuevo);
 
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -388,7 +375,6 @@ public class AsistenciaPorCursoView {
 					if (isInserted) {
 						JOptionPane.showMessageDialog(null, "Registrado correctamente", "",
 								JOptionPane.INFORMATION_MESSAGE);
-
 					} else {
 						JOptionPane.showMessageDialog(null, "No se pudo insertar el registro", null,
 								JOptionPane.ERROR_MESSAGE, null);
@@ -402,6 +388,7 @@ public class AsistenciaPorCursoView {
 			}
 
 		});
+
 
 	}
 }
