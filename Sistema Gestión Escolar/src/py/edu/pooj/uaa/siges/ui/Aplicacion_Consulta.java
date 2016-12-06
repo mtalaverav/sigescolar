@@ -22,7 +22,6 @@ public class Aplicacion_Consulta {
 
 	public static void main(String[] args) {
 
-
 		JFrame mimarco = new Marco_Aplicacion();
 		mimarco.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				"C:\\Users\\USER\\git\\siges\\Sistema Gesti\u00F3n Escolar\\Tutorial Apolo 4.0_html_m10daeb51.jpg"));
@@ -88,16 +87,12 @@ class Marco_Aplicacion extends JFrame {
 
 		add(botonConsulta, BorderLayout.SOUTH);
 
-		// Conexión
-
-		Connection dbConnection = null;
-
-		Statement statement = null;
-
 		try {
 
-			dbConnection = getDBConnection();
-			statement = dbConnection.createStatement();
+			Connection miConexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistgescolar",
+					"postgres", "4061950");
+
+			Statement statement = miConexion.createStatement();
 
 			// Carga ComboBox CURSO
 
@@ -125,35 +120,6 @@ class Marco_Aplicacion extends JFrame {
 
 	}
 
-	private Connection getDBConnection() {
-		Connection dbConnection = null;
-
-		try {
-
-			Class.forName("org.postgresql.Driver");
-
-		} catch (ClassNotFoundException e) {
-
-			System.out.println(e.getMessage());
-
-		}
-
-		try {
-
-			dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/sistgescolar", "postgres",
-					"4061950");
-			return dbConnection;
-
-		} catch (SQLException e) {
-
-			System.out.println(e.getMessage());
-
-		}
-
-		return dbConnection;
-
-	}
-
 	private void ejecutaConsulta() {
 
 		ResultSet rs = null;
@@ -169,7 +135,6 @@ class Marco_Aplicacion extends JFrame {
 
 			while (rs.next()) {
 
-			
 				resultado.append(rs.getString(1));
 				resultado.append(", ");
 				resultado.append(rs.getString(2));
@@ -194,7 +159,7 @@ class Marco_Aplicacion extends JFrame {
 	private PreparedStatement enviaConsultaCurso;
 
 	private final String consultaCursos = "SELECT empleado, fecha, curso, alumno, descripcion, justificativo FROM asistencia_curso WHERE curso = ?";
-	
+
 	private Connection dbConnection;
 
 	private JComboBox cursos;

@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Font;
 
 public class AsistenciaPorCursoConsultaView {
 
@@ -78,30 +79,35 @@ public class AsistenciaPorCursoConsultaView {
 		frmInformeAsistenciaDe.getContentPane().setLayout(null);
 
 		JComboBox comboCurso = new JComboBox();
-		comboCurso.setBounds(110, 30, 114, 20);
+		comboCurso.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		comboCurso.setBounds(114, 64, 114, 20);
 		frmInformeAsistenciaDe.getContentPane().add(comboCurso);
 		comboCurso.addItem("Todos");
 
 		JLabel lblCurso = new JLabel("Curso");
-		lblCurso.setBounds(21, 33, 46, 14);
+		lblCurso.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		lblCurso.setBounds(21, 67, 46, 14);
 		frmInformeAsistenciaDe.getContentPane().add(lblCurso);
 
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
-		lblDescripcin.setBounds(21, 119, 69, 14);
+		lblDescripcin.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		lblDescripcin.setBounds(21, 105, 69, 14);
 		frmInformeAsistenciaDe.getContentPane().add(lblDescripcin);
 
 		JComboBox comboDescripcion = new JComboBox();
-		comboDescripcion.setBounds(114, 116, 99, 20);
+		comboDescripcion.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		comboDescripcion.setBounds(112, 102, 116, 20);
 		frmInformeAsistenciaDe.getContentPane().add(comboDescripcion);
 		comboDescripcion.addItem("Todos");
 
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setColumns(6);
-		textArea.setBounds(31, 152, 383, 165);
+		textArea.setBounds(21, 172, 383, 149);
 		frmInformeAsistenciaDe.getContentPane().add(textArea);
 
 		JButton btnConsulta = new JButton("Consulta");
+		btnConsulta.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnConsulta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +141,6 @@ public class AsistenciaPorCursoConsultaView {
 						textArea.append((", "));
 						textArea.append(rs.getString(6));
 						textArea.append((", "));
-						
 
 					}
 
@@ -149,6 +154,7 @@ public class AsistenciaPorCursoConsultaView {
 		frmInformeAsistenciaDe.getContentPane().add(btnConsulta);
 
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				confirmar();
@@ -156,6 +162,21 @@ public class AsistenciaPorCursoConsultaView {
 		});
 		btnCancelar.setBounds(335, 344, 89, 23);
 		frmInformeAsistenciaDe.getContentPane().add(btnCancelar);
+		
+		JLabel lblBuscarPor = new JLabel("Buscar por:");
+		lblBuscarPor.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		lblBuscarPor.setBounds(21, 42, 69, 14);
+		frmInformeAsistenciaDe.getContentPane().add(lblBuscarPor);
+		
+		JLabel lblInformeDeAsistencia = new JLabel("Informe de Asistencia");
+		lblInformeDeAsistencia.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		lblInformeDeAsistencia.setBounds(150, 26, 196, 14);
+		frmInformeAsistenciaDe.getContentPane().add(lblInformeDeAsistencia);
+		
+		JLabel lblResultado = new JLabel("Resultado:");
+		lblResultado.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		lblResultado.setBounds(21, 147, 69, 14);
+		frmInformeAsistenciaDe.getContentPane().add(lblResultado);
 
 		// Conexión
 
@@ -209,6 +230,4 @@ public class AsistenciaPorCursoConsultaView {
 		}
 		return dbConnection;
 	}
-
-
 }
