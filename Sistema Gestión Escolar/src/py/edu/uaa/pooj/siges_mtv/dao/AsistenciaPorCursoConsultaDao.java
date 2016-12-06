@@ -28,7 +28,7 @@ public class AsistenciaPorCursoConsultaDao {
 			
 			dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
 			statement = dbConnection.createStatement();
-			String query = "SELECT *FROM asistencia_curso";
+			String query = "SELECT * FROM asistencia_curso";
 			
 			ResultSet rs = statement.executeQuery(query);
 

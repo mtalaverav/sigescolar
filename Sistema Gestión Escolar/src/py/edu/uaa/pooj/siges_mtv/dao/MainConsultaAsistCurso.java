@@ -10,10 +10,9 @@ public class MainConsultaAsistCurso {
 		System.out.println("\n");
 		AsistenciaPorCursoDao asistenciaDao = new AsistenciaPorCursoDao();
 		List<AsistenciaPorCurso> asistencias = asistenciaDao.recuperarAsistencia();
-		for (AsistenciaPorCurso  asistencia : asistencias) {
+		for (AsistenciaPorCurso asistencia : asistencias) {
 			System.out.println(asistencia.toString());
 		}
 
 	}
-
 }

@@ -34,6 +34,7 @@ import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
 import py.edu.uaa.pooj.siges_mtv.model.Empleado;
+import javax.swing.UIManager;
 
 public class AsistenciaPorCursoView {
 
@@ -78,69 +79,71 @@ public class AsistenciaPorCursoView {
 		EmpleadoDao empleadoDao = new EmpleadoDao();
 
 		frmRegistroDeAsistencia = new JFrame();
+		frmRegistroDeAsistencia.setAutoRequestFocus(false);
 		frmRegistroDeAsistencia.getContentPane().setForeground(new Color(255, 255, 204));
 		frmRegistroDeAsistencia.setFont(new Font("Arial", Font.PLAIN, 12));
-		frmRegistroDeAsistencia.setBackground(Color.CYAN);
+		frmRegistroDeAsistencia.setBackground(UIManager.getColor("CheckBox.light"));
 		frmRegistroDeAsistencia.setIconImage(Toolkit.getDefaultToolkit()
 				.getImage("C:\\Users\\USER\\git\\Sistema Gesti\u00F3n Escolar\\asistencia.png"));
 		frmRegistroDeAsistencia.setTitle("Registro de Asistencia");
 		frmRegistroDeAsistencia.getContentPane().setBackground(new Color(255, 255, 204));
-		frmRegistroDeAsistencia.setBounds(100, 100, 403, 691);
+		frmRegistroDeAsistencia.setBounds(100, 100, 703, 576);
 		frmRegistroDeAsistencia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeAsistencia.getContentPane().setLayout(null);
 
 		JLabel lblRegistroDeAsistencia = new JLabel("Registro de Asistencia Por Curso");
-		lblRegistroDeAsistencia.setFont(new Font("Century Gothic", Font.BOLD, 14));
-		lblRegistroDeAsistencia.setBounds(74, 23, 227, 46);
+		lblRegistroDeAsistencia.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
+		lblRegistroDeAsistencia.setBounds(195, 23, 352, 46);
 		frmRegistroDeAsistencia.getContentPane().add(lblRegistroDeAsistencia);
 
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		btnCancelar.setBackground(UIManager.getColor("Button.light"));
+		btnCancelar.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				confirmar();
 			}
 		});
-		btnCancelar.setBounds(274, 599, 89, 23);
+		btnCancelar.setBounds(560, 442, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnCancelar);
 
 		JLabel lblEmpleado = new JLabel("Empleado");
-		lblEmpleado.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		lblEmpleado.setBounds(74, 154, 62, 14);
+		lblEmpleado.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblEmpleado.setBounds(84, 108, 62, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblEmpleado);
 
 		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		lblFecha.setBounds(74, 108, 46, 14);
+		lblFecha.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblFecha.setBounds(368, 108, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblFecha);
 
 		JLabel lblCurso = new JLabel("Curso");
-		lblCurso.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		lblCurso.setBounds(74, 198, 46, 14);
+		lblCurso.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblCurso.setBounds(84, 194, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblCurso);
 
 		JLabel lblJustificativo = new JLabel("Justificativo");
-		lblJustificativo.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		lblJustificativo.setBounds(74, 376, 72, 14);
+		lblJustificativo.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblJustificativo.setBounds(368, 238, 95, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblJustificativo);
 
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setToolTipText("");
-		dateChooser.setBounds(195, 102, 95, 20);
+		dateChooser.setBounds(455, 102, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(dateChooser);
 
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(255, 255, 204));
 		panel.setBackground(new Color(255, 255, 204));
 		ButtonGroup descripcionAsist = new ButtonGroup();
-		panel.setBounds(195, 293, 62, 66);
+		panel.setBounds(455, 149, 95, 66);
 
-		JRadioButton optSi = new JRadioButton("S\u00ED", true);
-		optSi.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		JRadioButton optSi = new JRadioButton("Presente\r\n", true);
+		optSi.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		optSi.setBackground(new Color(255, 255, 204));
-		JRadioButton optNo = new JRadioButton("No", false);
-		optNo.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		JRadioButton optNo = new JRadioButton("Ausente", false);
+		optNo.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		optNo.setBackground(new Color(255, 255, 204));
 
 		descripcionAsist.add(optSi);
@@ -150,8 +153,9 @@ public class AsistenciaPorCursoView {
 		frmRegistroDeAsistencia.getContentPane().add(panel);
 
 		JButton btnRegistrar = new JButton("Registrar");
-		btnRegistrar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		btnRegistrar.setBounds(31, 553, 89, 23);
+		btnRegistrar.setBackground(UIManager.getColor("Button.light"));
+		btnRegistrar.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		btnRegistrar.setBounds(30, 442, 100, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnRegistrar);
 
 		// EMPLEADO
@@ -161,7 +165,8 @@ public class AsistenciaPorCursoView {
 			stringComboEmpleado.add(empleado.getNombre());
 		}
 		JComboBox<Empleado> cmbEmpleado = new JComboBox(stringComboEmpleado.toArray());
-		cmbEmpleado.setBounds(195, 151, 95, 20);
+		cmbEmpleado.setBackground(new Color(255, 255, 204));
+		cmbEmpleado.setBounds(195, 106, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbEmpleado);
 
 		// CURSO
@@ -171,12 +176,13 @@ public class AsistenciaPorCursoView {
 			stringComboCurso.add(curso.getDecripcion());
 		}
 		JComboBox cmbCurso = new JComboBox(stringComboCurso.toArray());
-		cmbCurso.setBounds(195, 195, 95, 20);
+		cmbCurso.setBackground(new Color(255, 255, 204));
+		cmbCurso.setBounds(195, 192, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
 
 		JLabel lblAlumno = new JLabel("Alumno ");
-		lblAlumno.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		lblAlumno.setBounds(74, 245, 46, 14);
+		lblAlumno.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblAlumno.setBounds(84, 267, 83, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
 
 		// ALUMNO
@@ -186,11 +192,13 @@ public class AsistenciaPorCursoView {
 			stringComboAlumno.add(alumno.getNombre());
 		}
 		JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
-		cmbAlumno.setBounds(195, 242, 95, 20);
+		cmbAlumno.setBackground(new Color(255, 255, 204));
+		cmbAlumno.setBounds(195, 265, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
+		btnEliminar.setBackground(UIManager.getColor("Button.light"));
+		btnEliminar.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -238,22 +246,23 @@ public class AsistenciaPorCursoView {
 
 			}
 		});
-		btnEliminar.setBounds(147, 599, 89, 23);
+		btnEliminar.setBounds(301, 442, 95, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
 		
 
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
-		lblDescripcin.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		lblDescripcin.setBounds(74, 293, 46, 14);
+		lblDescripcin.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblDescripcin.setBounds(368, 161, 83, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblDescripcin);
 
 		JEditorPane dtrpnDescribaLaJustificacin = new JEditorPane();
 		dtrpnDescribaLaJustificacin.setToolTipText("");
 		dtrpnDescribaLaJustificacin.setBackground(new Color(255, 255, 255));
-		dtrpnDescribaLaJustificacin.setBounds(74, 407, 236, 89);
+		dtrpnDescribaLaJustificacin.setBounds(368, 273, 236, 104);
 		frmRegistroDeAsistencia.getContentPane().add(dtrpnDescribaLaJustificacin);
 
 		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.setBackground(UIManager.getColor("Button.light"));
 		btnActualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -310,11 +319,12 @@ public class AsistenciaPorCursoView {
 
 			}
 		});
-		btnActualizar.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		btnActualizar.setBounds(147, 553, 89, 23);
+		btnActualizar.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		btnActualizar.setBounds(156, 442, 112, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnActualizar);
 
 		JButton btnInform = new JButton("Informe");
+		btnInform.setBackground(UIManager.getColor("Button.light"));
 		btnInform.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -322,8 +332,8 @@ public class AsistenciaPorCursoView {
 				visible.frmInformeAsistenciaDe.setVisible(true);
 			}
 		});
-		btnInform.setFont(new Font("Trebuchet MS", Font.PLAIN, 12));
-		btnInform.setBounds(274, 553, 89, 23);
+		btnInform.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		btnInform.setBounds(431, 442, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnInform);
 
 		btnRegistrar.addActionListener(new ActionListener() {

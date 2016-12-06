@@ -2,6 +2,7 @@ package py.edu.uaa.pooj.siges_mtv.dao;
 
 import java.util.List;
 
+import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
 import py.edu.uaa.pooj.siges_mtv.model.País;
@@ -12,12 +13,12 @@ public class MainConsultas {
 
 		System.out.println("Consultas.");
 
-//		System.out.println("\n");
-//		AlumnoDao alumnoDao = new AlumnoDao();
-//		List<Alumno> alumnos = alumnoDao.recuperarAlumno();
-//		for (Alumno alumno : alumnos) {
-//			System.out.println(alumno.toString());
-//		}
+		System.out.println("\n");
+		AlumnoDao alumnoDao = new AlumnoDao();
+		List<Alumno> alumnos = alumnoDao.recuperarAlumno();
+		for (Alumno alumno : alumnos) {
+			System.out.println(alumno.toString());
+		}
 //
 //		System.out.println("\n");
 //		EspecialidadDao especialidadDao = new EspecialidadDao();
@@ -47,12 +48,12 @@ public class MainConsultas {
 //			System.out.println(pais.toString());
 //		}
 
-		System.out.println("\n");
-		AsistenciaPorCursoDao asistenciaDao = new AsistenciaPorCursoDao();
-		List<AsistenciaPorCurso> asistencias = asistenciaDao.recuperarAsistencia();
-		for (AsistenciaPorCurso  asistencia : asistencias) {
-			System.out.println(asistencia.toString());
-		}
+//		System.out.println("\n");
+//		AsistenciaPorCursoDao asistenciaDao = new AsistenciaPorCursoDao();
+//		List<AsistenciaPorCurso> asistencias = asistenciaDao.recuperarAsistencia();
+//		for (AsistenciaPorCurso  asistencia : asistencias) {
+//			System.out.println(asistencia.toString());
+//		}
 //
 //		System.out.println("\n");
 //		TurnoDao turno = new TurnoDao();

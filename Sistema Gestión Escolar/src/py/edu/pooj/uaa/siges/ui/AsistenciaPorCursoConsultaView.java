@@ -1,5 +1,6 @@
 package py.edu.pooj.uaa.siges.ui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import com.toedter.calendar.JDateChooser;
-import java.awt.Color;
 
 public class AsistenciaPorCursoConsultaView {
 
@@ -27,16 +27,6 @@ public class AsistenciaPorCursoConsultaView {
 	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/sistgescolar";
 	private static final String DB_USER = "postgres";
 	private static final String DB_PASSWORD = "4061950";
-
-	// consulta preparada.
-	private PreparedStatement enviaConsultaCurso;
-	private final String consultaCursos = "SELECT empleado, fecha, curso, alumno, descripcion, justificativo FROM asistencia_curso WHERE curso = ?";
-
-	private JComboBox comboCurso;
-	private JComboBox comboDescripcion;
-	private JTextArea textResultado;
-
-	private Connection dbConnection;
 
 	protected static final String frame = null;
 	JFrame frmInformeAsistenciaDe;
@@ -96,14 +86,6 @@ public class AsistenciaPorCursoConsultaView {
 		lblCurso.setBounds(21, 33, 46, 14);
 		frmInformeAsistenciaDe.getContentPane().add(lblCurso);
 
-		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setBounds(21, 75, 46, 14);
-		frmInformeAsistenciaDe.getContentPane().add(lblFecha);
-
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(110, 75, 103, 20);
-		frmInformeAsistenciaDe.getContentPane().add(dateChooser);
-
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
 		lblDescripcin.setBounds(21, 119, 69, 14);
 		frmInformeAsistenciaDe.getContentPane().add(lblDescripcin);
@@ -113,11 +95,54 @@ public class AsistenciaPorCursoConsultaView {
 		frmInformeAsistenciaDe.getContentPane().add(comboDescripcion);
 		comboDescripcion.addItem("Todos");
 
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setColumns(6);
+		textArea.setBounds(31, 152, 383, 165);
+		frmInformeAsistenciaDe.getContentPane().add(textArea);
+
 		JButton btnConsulta = new JButton("Consulta");
 		btnConsulta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ejecutarConsulta();
+
+				PreparedStatement enviaConsultaCurso;
+				String consultaCursos = "SELECT empleado, fecha, curso, alumno, descripcion, justificativo FROM asistencia_curso WHERE curso = ?";
+				Connection dbConnection = null;
+
+				ResultSet rs = null;
+
+				try {
+
+					String curso = (String) comboCurso.getSelectedItem();
+					enviaConsultaCurso = dbConnection.prepareStatement(consultaCursos);
+
+					enviaConsultaCurso.setString(1, curso);
+
+					rs = enviaConsultaCurso.executeQuery();
+
+					while (rs.next()) {
+
+						textArea.append(rs.getString(1));
+						textArea.append((", "));
+						textArea.append(rs.getString(2));
+						textArea.append((", "));
+						textArea.append(rs.getString(3));
+						textArea.append((", "));
+						textArea.append(rs.getString(4));
+						textArea.append((", "));
+						textArea.append(rs.getString(5));
+						textArea.append((", "));
+						textArea.append(rs.getString(6));
+						textArea.append((", "));
+						
+
+					}
+
+				} catch (Exception e1) {
+
+				}
+
 			}
 		});
 		btnConsulta.setBounds(236, 344, 89, 23);
@@ -132,10 +157,6 @@ public class AsistenciaPorCursoConsultaView {
 		btnCancelar.setBounds(335, 344, 89, 23);
 		frmInformeAsistenciaDe.getContentPane().add(btnCancelar);
 
-		JTextArea textResultado = new JTextArea();
-		textResultado.setBounds(22, 157, 380, 160);
-		frmInformeAsistenciaDe.getContentPane().add(textResultado);
-
 		// Conexión
 
 		Connection dbConnection = null;
@@ -149,20 +170,21 @@ public class AsistenciaPorCursoConsultaView {
 
 			// Carga ComboBox CURSO
 
-			String consultaCursos = "SELECT DISTINCT curso FROM asistencia_curso";
-			ResultSet rs = statement.executeQuery(consultaCursos);
+			String consulta = "SELECT DISTINCT curso FROM asistencia_curso";
+			ResultSet rs = statement.executeQuery(consulta);
 
 			while (rs.next()) {
-				extracted(comboCurso, rs);
+
+				comboCurso.addItem(rs.getString(1));
 			}
 			rs.close();
 
 			// Carga ComboBox Descripcion
-			String consultaDescripcion = "SELECT DISTINCT descripcion FROM asistencia_curso";
-			ResultSet rS = statement.executeQuery(consultaDescripcion);
+			consulta = "SELECT DISTINCT descripcion FROM asistencia_curso";
+			rs = statement.executeQuery(consulta);
 
-			while (rS.next()) {
-				extracted(comboDescripcion, rS);
+			while (rs.next()) {
+				comboDescripcion.addItem(rs.getString(1));
 			}
 			rs.close();
 
@@ -170,10 +192,6 @@ public class AsistenciaPorCursoConsultaView {
 
 		}
 
-	}
-
-	private void extracted(JComboBox comboCurso, ResultSet rs) throws SQLException {
-		comboCurso.addItem(rs.getString(1));
 	}
 
 	private static Connection getDBConnection() {
@@ -192,46 +210,5 @@ public class AsistenciaPorCursoConsultaView {
 		return dbConnection;
 	}
 
-	private void ejecutarConsulta() {
 
-		ResultSet rs = null;
-		try {
-
-			// se guarda en la variable curso lo seleccionado en el ComboBox
-			// getSelectedItem = Object - se convierte a String
-			String cursos = (String) comboCurso.getSelectedItem();
-
-			// consulta preparada almacenada en enviaConsultaCurso utilizando el
-			// metodo prepareStatement enviando como parametro la consulta
-			// parametrizada
-			enviaConsultaCurso = dbConnection.prepareStatement(consultaCursos);
-
-			// setString para pasar por parametro el valor.
-			enviaConsultaCurso.setString(1, cursos);
-
-			// ResultSet para ejecutar la consulta
-			rs = enviaConsultaCurso.executeQuery();
-
-			while (rs.next()) { // mientras haya registros
-				textResultado.append(rs.getString(1));
-				textResultado.append(", ");
-				textResultado.append(rs.getString(2));
-				textResultado.append(", ");
-				textResultado.append(rs.getString(3));
-				textResultado.append(", ");
-				textResultado.append(rs.getString(4));
-				textResultado.append(", ");
-				textResultado.append(rs.getString(5));
-				textResultado.append(", ");
-				textResultado.append(rs.getString(6));
-
-				// salto de linea
-				textResultado.append("\n");
-			}
-
-		} catch (Exception e) {
-
-		}
-
-	}
 }
