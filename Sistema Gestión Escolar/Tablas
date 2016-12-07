@@ -1,0 +1,104 @@
+Tablas de la BD (imposible hacer backup)
+
+**TABLA PRINCIPAL : asistencia_curso**
+
+-- Table: public.asistencia_curso
+
+-- DROP TABLE public.asistencia_curso;
+
+CREATE TABLE public.asistencia_curso
+(
+    id_asistencia character varying COLLATE pg_catalog."default" NOT NULL,
+    id_empleado character(2) COLLATE pg_catalog."default",
+    fecha date,
+    id_curso character(2) COLLATE pg_catalog."default",
+    id_alumno character(2) COLLATE pg_catalog."default",
+    descripcion character varying COLLATE pg_catalog."default",
+    justificativo character varying COLLATE pg_catalog."default",
+    CONSTRAINT pk_asistencia_curso PRIMARY KEY (id_asistencia),
+    CONSTRAINT fk_asistencia_curso_alumno FOREIGN KEY (id_alumno)
+        REFERENCES public.alumno (id_alumno) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_asistencia_curso_curso FOREIGN KEY (id_curso)
+        REFERENCES public.curso (id_curso) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE RESTRICT,
+    CONSTRAINT fk_asistencia_curso_empleado FOREIGN KEY (id_empleado)
+        REFERENCES public.empleado (id_empleado) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE RESTRICT
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.asistencia_curso
+    OWNER to postgres;
+    
+    
+**TABLA ALUMNO**
+
+-- Table: public.alumno
+
+-- DROP TABLE public.alumno;
+
+CREATE TABLE public.alumno
+(
+    id_alumno character(2) COLLATE pg_catalog."default" NOT NULL,
+    nombre character varying COLLATE pg_catalog."default",
+    apellido character varying COLLATE pg_catalog."default",
+    nro_cedula integer,
+    CONSTRAINT pk_alumno PRIMARY KEY (id_alumno)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.alumno
+    OWNER to postgres;
+    
+**TABLA EMPLEADO**
+ 
+ -- Table: public.empleado
+
+-- DROP TABLE public.empleado;
+
+CREATE TABLE public.empleado
+(
+    id_empleado character(2) COLLATE pg_catalog."default" NOT NULL,
+    nombre character varying COLLATE pg_catalog."default",
+    apellido character varying COLLATE pg_catalog."default",
+    CONSTRAINT pk_empleado PRIMARY KEY (id_empleado)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.empleado
+    OWNER to postgres;
+    
+    
+**TABLA CURSO**
+ 
+ -- Table: public.curso
+
+-- DROP TABLE public.curso;
+
+CREATE TABLE public.curso
+(
+    id_curso character(2) COLLATE pg_catalog."default" NOT NULL,
+    descripcion character varying COLLATE pg_catalog."default",
+    CONSTRAINT pk_curso PRIMARY KEY (id_curso)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.curso
+    OWNER to postgres;
+

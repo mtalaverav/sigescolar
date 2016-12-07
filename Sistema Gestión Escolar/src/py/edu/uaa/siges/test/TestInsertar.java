@@ -31,7 +31,7 @@ public class TestInsertar {
 
 		AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
 		asistCurso.setEmpleado(empleado);
-		asistCurso.setFecha("22/05/2016");
+//		asistCurso.setFecha("22/05/2016");
 		asistCurso.setCurso(curso);
 		asistCurso.setAlumno(alm);
 		asistCurso.setDescripcion("Si");

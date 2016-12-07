@@ -9,9 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -23,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -34,11 +34,11 @@ import py.edu.uaa.pooj.siges_mtv.model.Alumno;
 import py.edu.uaa.pooj.siges_mtv.model.AsistenciaPorCurso;
 import py.edu.uaa.pooj.siges_mtv.model.Curso;
 import py.edu.uaa.pooj.siges_mtv.model.Empleado;
-import javax.swing.UIManager;
 
 public class AsistenciaPorCursoView {
 
 	private JFrame frmRegistroDeAsistencia;
+	private JTextField txtCodigo;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -69,9 +69,6 @@ public class AsistenciaPorCursoView {
 		}
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 
 		CursoDao cursoDao = new CursoDao();
@@ -110,7 +107,7 @@ public class AsistenciaPorCursoView {
 
 		JLabel lblEmpleado = new JLabel("Empleado");
 		lblEmpleado.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
-		lblEmpleado.setBounds(84, 108, 62, 14);
+		lblEmpleado.setBounds(84, 201, 62, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblEmpleado);
 
 		JLabel lblFecha = new JLabel("Fecha");
@@ -120,7 +117,7 @@ public class AsistenciaPorCursoView {
 
 		JLabel lblCurso = new JLabel("Curso");
 		lblCurso.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
-		lblCurso.setBounds(84, 194, 46, 14);
+		lblCurso.setBounds(84, 275, 46, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblCurso);
 
 		JLabel lblJustificativo = new JLabel("Justificativo");
@@ -166,23 +163,23 @@ public class AsistenciaPorCursoView {
 		}
 		JComboBox<Empleado> cmbEmpleado = new JComboBox(stringComboEmpleado.toArray());
 		cmbEmpleado.setBackground(new Color(255, 255, 204));
-		cmbEmpleado.setBounds(195, 106, 95, 20);
+		cmbEmpleado.setBounds(195, 199, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbEmpleado);
 
 		// CURSO
 		List<Curso> cursos = cursoDao.recuperarCursos();
 		ArrayList<String> stringComboCurso = new ArrayList<>();
 		for (Curso curso : cursos) {
-			stringComboCurso.add(curso.getDecripcion());
+			stringComboCurso.add(curso.getCodigo());
 		}
 		JComboBox cmbCurso = new JComboBox(stringComboCurso.toArray());
 		cmbCurso.setBackground(new Color(255, 255, 204));
-		cmbCurso.setBounds(195, 192, 95, 20);
+		cmbCurso.setBounds(195, 273, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
 
 		JLabel lblAlumno = new JLabel("Alumno ");
 		lblAlumno.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
-		lblAlumno.setBounds(84, 267, 83, 14);
+		lblAlumno.setBounds(84, 341, 83, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
 
 		// ALUMNO
@@ -193,9 +190,9 @@ public class AsistenciaPorCursoView {
 		}
 		JComboBox cmbAlumno = new JComboBox(stringComboAlumno.toArray());
 		cmbAlumno.setBackground(new Color(255, 255, 204));
-		cmbAlumno.setBounds(195, 265, 95, 20);
+		cmbAlumno.setBounds(195, 339, 95, 20);
 		frmRegistroDeAsistencia.getContentPane().add(cmbAlumno);
-		
+
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBackground(UIManager.getColor("Button.light"));
 		btnEliminar.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
@@ -204,9 +201,11 @@ public class AsistenciaPorCursoView {
 			public void mouseClicked(MouseEvent arg0) {
 				AsistenciaPorCurso asistCurso = new AsistenciaPorCurso();
 				// FECHA
-				Date date = dateChooser.getDate();
-				String fecha = DateFormat.getInstance().format(date);
-				asistCurso.setFecha(fecha);
+				// Date date = dateChooser.getDate();
+				// String fecha = DateFormat.getInstance().format(date);
+				// asistCurso.setFecha(fecha);
+
+				asistCurso.setFecha(dateChooser.getDate());
 
 				// EMPLEADO
 				Empleado emp = new Empleado();
@@ -248,7 +247,6 @@ public class AsistenciaPorCursoView {
 		});
 		btnEliminar.setBounds(301, 442, 95, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnEliminar);
-		
 
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
 		lblDescripcin.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
@@ -270,9 +268,11 @@ public class AsistenciaPorCursoView {
 				AsistenciaPorCursoDao asisteCursoDao = new AsistenciaPorCursoDao();
 
 				// FECHA
-				Date date = dateChooser.getDate();
-				String fecha = DateFormat.getInstance().format(date);
-				asistCurso.setFecha(fecha);
+				// Date date = dateChooser.getDate();
+				// String fecha = DateFormat.getInstance().format(date);
+				// asistCurso.setFecha(fecha);
+
+				asistCurso.setFecha(dateChooser.getDate());
 
 				// EMPLEADO
 				Empleado emp = new Empleado();
@@ -336,6 +336,16 @@ public class AsistenciaPorCursoView {
 		btnInform.setBounds(431, 442, 89, 23);
 		frmRegistroDeAsistencia.getContentPane().add(btnInform);
 
+		JLabel lblCdigo = new JLabel("C\u00F3digo");
+		lblCdigo.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
+		lblCdigo.setBounds(84, 109, 46, 14);
+		frmRegistroDeAsistencia.getContentPane().add(lblCdigo);
+
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(182, 106, 86, 20);
+		frmRegistroDeAsistencia.getContentPane().add(txtCodigo);
+		txtCodigo.setColumns(10);
+
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -343,37 +353,37 @@ public class AsistenciaPorCursoView {
 				AsistenciaPorCursoDao asisteCursoDao = new AsistenciaPorCursoDao();
 				try {
 
-					// FECHA
-					Date date = dateChooser.getDate();
-					String fecha = DateFormat.getInstance().format(date);
-					asistCurso.setFecha(fecha);
+					asistCurso.setCodigo(txtCodigo.getText());
+
+					// // FECHA
+					// Date date = dateChooser.getDate();
+					// String fecha = DateFormat.getInstance().format(date);
+					// asistCurso.setFecha(fecha);
+
+					asistCurso.setFecha(dateChooser.getDate());
 
 					// EMPLEADO
 					Empleado emp = new Empleado();
 					emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
-					// emp.setNombre(cmbEmpleado.getSelectedItem().toString());
 					asistCurso.setEmpleado(emp);
 
 					// ALUMNO
 					Alumno alm = new Alumno();
-					// alm.setNombre(cmbAlumno.getSelectedItem().toString());
 					alm.setCodigo(cmbAlumno.getSelectedItem().toString());
 					asistCurso.setAlumno(alm);
 
 					// CURSO
 					Curso crs = new Curso();
-					// crs.setDecripcion(cmbCurso.getSelectedItem().toString());
 					crs.setCodigo(cmbCurso.getSelectedItem().toString());
 					asistCurso.setCurso(crs);
 
 					// DESCRIPCION
 					String descripcionAsistencia = null;
 					if (optSi.isSelected()) {
-						descripcionAsistencia = "Sí";
+						descripcionAsistencia = "Presente";
 						asistCurso.setDescripcion(descripcionAsistencia);
 					} else {
-						optSi.setSelected(false);
-						descripcionAsistencia = "No";
+						descripcionAsistencia = "Ausente";
 						asistCurso.setDescripcion(descripcionAsistencia);
 					}
 
@@ -387,18 +397,14 @@ public class AsistenciaPorCursoView {
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						JOptionPane.showMessageDialog(null, "No se pudo insertar el registro", null,
-								JOptionPane.ERROR_MESSAGE, null);
+								JOptionPane.ERROR_MESSAGE);
 					}
 
 				} catch (SQLException e) {
 
 					System.out.println(e.getMessage());
-
 				}
 			}
-
 		});
-
-
 	}
 }

@@ -123,7 +123,7 @@ public class AlumnoDao {
 
 		// recuperacion de alumno
 
-		String query = "SELECT *FROM alumno";
+		String query = "SELECT * FROM alumno";
 		List<Alumno> alumnos = new ArrayList<Alumno>();
 		try {
 

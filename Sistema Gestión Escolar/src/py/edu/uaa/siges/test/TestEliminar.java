@@ -30,7 +30,7 @@ public class TestEliminar {
 		 // Prueba de eliminar
 		 AsistenciaPorCurso asistCurso1 = new AsistenciaPorCurso();
 		 asistCurso1.setEmpleado(empleado);
-		 asistCurso1.setFecha("22/03/2016");
+//		 asistCurso1.setFecha("22/03/2016");
 		 asistCurso1.setCurso(curso);
 		 asistCurso1.setAlumno(alm);
 		 asistCurso1.setDescripcion("No");

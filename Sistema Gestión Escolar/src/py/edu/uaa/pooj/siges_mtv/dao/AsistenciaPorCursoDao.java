@@ -37,28 +37,32 @@ public class AsistenciaPorCursoDao {
 			dbConnection = getDBConnection();
 			ResultSet rs = dbConnection.createStatement().executeQuery(query);
 			while (rs.next()) {
-				
+
 				AsistenciaPorCurso asistcurso = new AsistenciaPorCurso();
+				
+				asistcurso.setCodigo(rs.getString(1));
 
 				// Empleado
-				String codigoEmpleado = rs.getString(1);
+				String codigoEmpleado = rs.getString(2);
 				if (codigoEmpleado != null) {
 					Empleado empleado = this.empleadoDao.recuperarEmpleadoPorCodigo(codigoEmpleado);
 					asistcurso.setEmpleado(empleado);
 				}
 
 				// FECHA
-				asistcurso.setFecha(rs.getString(2));
+//				asistcurso.setFecha(rs.getString(2));
+				asistcurso.setFecha(rs.getDate(3));
+				
 
 				// Curso
-				String codigoCurso = rs.getString(3);
+				String codigoCurso = rs.getString(4);
 				if (codigoCurso != null) {
 					Curso curso = this.cursoDao.recuperarCursoPorCodigo(codigoCurso);
 					asistcurso.setCurso(curso);
 				}
 
 				// Alumno
-				String codigoAlumno = rs.getString(4);
+				String codigoAlumno = rs.getString(5);
 				if (codigoAlumno != null) {
 					Alumno alumno = this.alumnoDao.recuperarAlumnoPorCodigo(codigoAlumno);
 					asistcurso.setAlumno(alumno);
@@ -66,10 +70,10 @@ public class AsistenciaPorCursoDao {
 				}
 
 				// Descripcion
-				asistcurso.setDescripcion(rs.getString(5));
+				asistcurso.setDescripcion(rs.getString(6));
 
 				// Justificativo
-				asistcurso.setJustificativo(rs.getString(6));
+				asistcurso.setJustificativo(rs.getString(7));
 
 				asistencias.add(asistcurso);
 			}
@@ -100,42 +104,48 @@ public class AsistenciaPorCursoDao {
 		PreparedStatement preparedStatement = null;
 
 		String insertTableSQL = "INSERT INTO asistencia_curso"
-				+ "( empleado, fecha, curso, alumno, descripcion, justificativo) VALUES" + "(?, ?, ?, ?, ?, ?)";
+				+ "( id_asistencia, id_empleado, fecha, id_curso, id_alumno, descripcion, justificativo) VALUES"
+				+ "(?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 
+			preparedStatement.setString(1, asistencia_curso.getCodigo());
+
 			// EMPLEADO
 			if (asistencia_curso.getEmpleado() != null) {
-				preparedStatement.setString(1, asistencia_curso.getEmpleado().getCodigo());
-			} else {
-				preparedStatement.setNull(1, Types.CHAR);
-			}
-
-			// FECHA
-			if (asistencia_curso.getFecha() != null) {  
-				preparedStatement.setString(2, asistencia_curso.getFecha());
+				preparedStatement.setString(2, asistencia_curso.getEmpleado().getCodigo());
 			} else {
 				preparedStatement.setNull(2, Types.CHAR);
 			}
 
+			// FECHA
+			// if (asistencia_curso.getFecha() != null) {
+			// preparedStatement.setString(3, asistencia_curso.getFecha());
+			// } else {
+			// preparedStatement.setNull(3, Types.CHAR);
+			// }
+
+			java.sql.Date fechaRegistro = new java.sql.Date(asistencia_curso.getFecha().getTime());
+			preparedStatement.setDate(3, fechaRegistro);
+
 			// CURSO
 			if (asistencia_curso.getCurso() != null) {
-				preparedStatement.setString(3, asistencia_curso.getCurso().getCodigo());
-			} else {
-				preparedStatement.setNull(3, Types.CHAR);
-			}
-
-			// Alumno
-			if (asistencia_curso.getAlumno() != null) {
-				preparedStatement.setString(4, asistencia_curso.getAlumno().getCodigo());
+				preparedStatement.setString(4, asistencia_curso.getCurso().getCodigo());
 			} else {
 				preparedStatement.setNull(4, Types.CHAR);
 			}
 
-			preparedStatement.setString(5, asistencia_curso.getDescripcion());
-			preparedStatement.setString(6, asistencia_curso.getJustificativo());
+			// Alumno
+			if (asistencia_curso.getAlumno() != null) {
+				preparedStatement.setString(5, asistencia_curso.getAlumno().getCodigo());
+			} else {
+				preparedStatement.setNull(5, Types.CHAR);
+			}
+
+			preparedStatement.setString(6, asistencia_curso.getDescripcion());
+			preparedStatement.setString(7, asistencia_curso.getJustificativo());
 
 			preparedStatement.executeUpdate();
 			System.out.println("Registro correcto de datos.");
@@ -167,11 +177,14 @@ public class AsistenciaPorCursoDao {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(deleteSQL);
 
-			if (asistencia_curso.getFecha() != null) {
-				preparedStatement.setString(1, asistencia_curso.getFecha());
-			} else {
-				preparedStatement.setNull(1, Types.CHAR);
-			}
+//			if (asistencia_curso.getFecha() != null) {
+//				preparedStatement.setString(1, asistencia_curso.getFecha());
+//			} else {
+//				preparedStatement.setNull(1, Types.CHAR);
+//			}
+			
+			java.sql.Date fechaRegistro = new java.sql.Date(asistencia_curso.getFecha().getTime());
+			preparedStatement.setDate(1, fechaRegistro);
 
 			// execute delete SQL stetement
 			preparedStatement.executeUpdate();

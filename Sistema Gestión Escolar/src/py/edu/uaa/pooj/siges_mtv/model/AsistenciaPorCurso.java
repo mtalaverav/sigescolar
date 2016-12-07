@@ -1,15 +1,19 @@
 package py.edu.uaa.pooj.siges_mtv.model;
 
+import java.util.Date;
+
 public class AsistenciaPorCurso {
 
 	@Override
 	public String toString() {
-		return "AsistenciaPorCurso [empleado=" + empleado + ", fecha=" + fecha + ", curso=" + curso + ", alumno="
-				+ alumno + ", descripcion=" + descripcion + ", justificativo=" + justificativo + "]";
+		return "AsistenciaPorCurso [codigo=" + codigo + ", empleado=" + empleado + ", fecha=" + fecha + ", curso="
+				+ curso + ", alumno=" + alumno + ", descripcion=" + descripcion + ", justificativo=" + justificativo
+				+ "]";
 	}
 
+	private String codigo;
 	private Empleado empleado;
-	private String fecha;
+	private Date fecha;
 	private Curso curso;
 	private Alumno alumno;
 	private String descripcion;
@@ -26,7 +30,7 @@ public class AsistenciaPorCurso {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
-	
+
 	public String getJustificativo() {
 		return justificativo;
 	}
@@ -59,14 +63,20 @@ public class AsistenciaPorCurso {
 		this.descripcion = descripcion;
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
-	
-	
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 }
