@@ -178,7 +178,7 @@ public class AsistenciaPorCursoView {
 		frmRegistroDeAsistencia.getContentPane().add(cmbCurso);
 
 		JLabel lblAlumno = new JLabel("Alumno ");
-		lblAlumno.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));	
+		lblAlumno.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		lblAlumno.setBounds(84, 341, 83, 14);
 		frmRegistroDeAsistencia.getContentPane().add(lblAlumno);
 
@@ -207,39 +207,37 @@ public class AsistenciaPorCursoView {
 
 				asistCurso.setFecha(dateChooser.getDate());
 
-				// EMPLEADO - Guarda como String 
-//				Empleado emp = new Empleado();
-//				emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
-//				asistCurso.setEmpleado(emp);
-				
-				//Empleado - Guarda como Objeto
-				asistCurso.setEmpleado((Empleado) cmbEmpleado.getSelectedItem());
+				// EMPLEADO - Guarda como String
+				 Empleado emp = new Empleado();
+				 emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
+				 asistCurso.setEmpleado(emp);
 
-				// ALUMNO - Guarda como String 
-//				Alumno alm = new Alumno();
-//				alm.setCodigo(cmbAlumno.getSelectedItem().toString());
-//				asistCurso.setAlumno(alm);
-				
-				//Alumno - Guarda como Objeto
-				
-				asistCurso.setAlumno((Alumno) cmbAlumno.getSelectedItem());
+				// Empleado - Guarda como Objeto
+//				asistCurso.setEmpleado((Empleado) cmbEmpleado.getSelectedItem());
 
-//				// CURSO - Guarda como String 
-//				Curso crs = new Curso();
-//				crs.setCodigo(cmbCurso.getSelectedItem().toString());
-//				asistCurso.setCurso(crs);
-				
-				//Curso - Guarda el objeto 
-				asistCurso.setCurso((Curso) cmbCurso.getSelectedItem());
+//				 ALUMNO - Guarda como String
+				 Alumno alm = new Alumno();
+				 alm.setCodigo(cmbAlumno.getSelectedItem().toString());
+				 asistCurso.setAlumno(alm);
+
+				// Alumno - Guarda como Objeto
+				//asistCurso.setAlumno((Alumno) cmbAlumno.getSelectedItem());
+
+				 // CURSO - Guarda como String
+				 Curso crs = new Curso();
+				 crs.setCodigo(cmbCurso.getSelectedItem().toString());
+				 asistCurso.setCurso(crs);
+
+				// Curso - Guarda el objeto
+				//asistCurso.setCurso((Curso) cmbCurso.getSelectedItem());
 
 				// DESCRIPCION
 				String descripcionAsistencia = null;
 				if (optSi.isSelected()) {
-					descripcionAsistencia = "Sí";
+					descripcionAsistencia = "Presente";
 					asistCurso.setDescripcion(descripcionAsistencia);
 				} else {
-					optSi.setSelected(false);
-					descripcionAsistencia = "No";
+					descripcionAsistencia = "Ausente";
 					asistCurso.setDescripcion(descripcionAsistencia);
 				}
 
@@ -287,29 +285,25 @@ public class AsistenciaPorCursoView {
 				// EMPLEADO
 				Empleado emp = new Empleado();
 				emp.setCodigo(cmbEmpleado.getSelectedItem().toString());
-				// emp.setNombre(cmbEmpleado.getSelectedItem().toString());
 				asistCurso.setEmpleado(emp);
 
 				// ALUMNO
 				Alumno alm = new Alumno();
-				// alm.setNombre(cmbAlumno.getSelectedItem().toString());
 				alm.setCodigo(cmbAlumno.getSelectedItem().toString());
 				asistCurso.setAlumno(alm);
 
 				// CURSO
 				Curso crs = new Curso();
-				// crs.setDecripcion(cmbCurso.getSelectedItem().toString());
 				crs.setCodigo(cmbCurso.getSelectedItem().toString());
 				asistCurso.setCurso(crs);
 
 				// DESCRIPCION
 				String descripcionAsistencia = null;
 				if (optSi.isSelected()) {
-					descripcionAsistencia = "Sí";
+					descripcionAsistencia = "Presente";
 					asistCurso.setDescripcion(descripcionAsistencia);
 				} else {
-					optSi.setSelected(false);
-					descripcionAsistencia = "No";
+					descripcionAsistencia = "Ausente";
 					asistCurso.setDescripcion(descripcionAsistencia);
 				}
 
