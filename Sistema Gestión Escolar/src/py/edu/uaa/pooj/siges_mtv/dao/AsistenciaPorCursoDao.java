@@ -39,7 +39,7 @@ public class AsistenciaPorCursoDao {
 			while (rs.next()) {
 
 				AsistenciaPorCurso asistcurso = new AsistenciaPorCurso();
-				
+
 				asistcurso.setCodigo(rs.getString(1));
 
 				// Empleado
@@ -50,9 +50,8 @@ public class AsistenciaPorCursoDao {
 				}
 
 				// FECHA
-//				asistcurso.setFecha(rs.getString(2));
+				// asistcurso.setFecha(rs.getString(2));
 				asistcurso.setFecha(rs.getDate(3));
-				
 
 				// Curso
 				String codigoCurso = rs.getString(4);
@@ -147,6 +146,7 @@ public class AsistenciaPorCursoDao {
 			preparedStatement.setString(6, asistencia_curso.getDescripcion());
 			preparedStatement.setString(7, asistencia_curso.getJustificativo());
 
+			
 			preparedStatement.executeUpdate();
 			System.out.println("Registro correcto de datos.");
 			return true;
@@ -177,12 +177,12 @@ public class AsistenciaPorCursoDao {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(deleteSQL);
 
-//			if (asistencia_curso.getFecha() != null) {
-//				preparedStatement.setString(1, asistencia_curso.getFecha());
-//			} else {
-//				preparedStatement.setNull(1, Types.CHAR);
-//			}
-			
+			// if (asistencia_curso.getFecha() != null) {
+			// preparedStatement.setString(1, asistencia_curso.getFecha());
+			// } else {
+			// preparedStatement.setNull(1, Types.CHAR);
+			// }
+
 			java.sql.Date fechaRegistro = new java.sql.Date(asistencia_curso.getFecha().getTime());
 			preparedStatement.setDate(1, fechaRegistro);
 
